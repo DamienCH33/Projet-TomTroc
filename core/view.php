@@ -1,16 +1,18 @@
 <?php
 class View
 {
-    private string $viewName;
-
+    private string $viewFile;
+    
     public function __construct(string $viewName)
     {
-        $this->viewName = $viewName;
+        $this->viewFile = __DIR__ . '/../views/' . $viewName . '.php';      
     }
 
-    public function render(array $data = []): void
+    public function render(): void
     {
-        extract($data);
-        require __DIR__ . '/../views/' . $this->viewName . '.php';
+        ob_start();
+        require $this->viewFile;
+        $content = ob_get_clean();
+        require __DIR__ . '/../views/layout.php';
     }
 }
