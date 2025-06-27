@@ -58,3 +58,21 @@ nav.navbar.bg-light {
 .icon-nav {
    margin-right: 5px;
 }
+
+
+
+
+
+/*footer*/
+footer.footer {
+  font-size: 0.75rem;
+  gap: 50px;
+  display: flex;
+  background-color: var(--footerColor)!important;
+  height: 61px;
+}
+
+.footer-logo.img-fluid.mt-2.mt-lg-0 {
+  height: 17.36px;
+  width: 22px;
+}
