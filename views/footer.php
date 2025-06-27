@@ -1,5 +1,5 @@
 
-        <footer class="footer bg-light border-top py-3">
+        <footer class="footer bg-light border-top py-3 custom-container-1440">
             <div class="container d-flex flex-column flex-lg-row align-items-center justify-content-between">
                 <ul class="navbar-nav flex-row  gap-5 mb-2 mb-lg-0 ms-auto">
                     <li class="nav-item mx-2">

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="custom-container-1440">
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="custom-container">
                 <a class="navbar-brand" href="#">
