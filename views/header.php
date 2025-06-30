@@ -13,7 +13,7 @@
     <header class="custom-container-1440">
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="custom-container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/index.php?page=home">
                     <img src="images/logoNavbar.png" alt="Logo Tom Troc" class="navbar-logo">
                 </a>
 
@@ -25,7 +25,7 @@
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
                         <li class="nav-item mx-2">
-                            <a class="nav-link nav-accueil" href="#">Accueil</a>
+                            <a class="nav-link nav-accueil" href="/index.php?page=home">Accueil</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="/index.php?page=BookExchange">Nos livres à l'échange</a>

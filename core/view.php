@@ -8,17 +8,16 @@ class View
         $this->viewFile = __DIR__ . '/../views/' . $viewName . '.php';      
     }
 
-    public function render(): void
+   public function render(array $vars = []): void
     {
         if (!file_exists($this->viewFile)) {
             die("Erreur : Vue introuvable : " . $this->viewFile);
         }
 
+        extract($vars);
         ob_start();
         require $this->viewFile;
         $content = ob_get_clean();
-
-        extract(['content' => $content]);
 
         require __DIR__ . '/../views/layout.php';
     }

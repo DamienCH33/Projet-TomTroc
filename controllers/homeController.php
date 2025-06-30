@@ -2,8 +2,15 @@
 
 class HomeController
 {
-    public function showHome(): void{
+    public function showHome(): void
+    {
+        $db = new Database();
+        $pdo = $db->getPDO();
+
+        $manager = new BookExchangeManager($pdo);
+        $books = $manager->getAllBooks();
+
         $view = new View('home');
-        $view->render();
+        $view->render(['books' => $books]);
     }
 }

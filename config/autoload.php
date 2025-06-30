@@ -1,6 +1,6 @@
 <?php
 spl_autoload_register(function ($className) {
-    $folders = ['services', 'models', 'controllers', 'views', 'core'];
+    $folders = ['services', 'models', 'controllers', 'views', 'core', 'config'];
 
     foreach ($folders as $folder) {
         $file = __DIR__ . '/../' . $folder . '/' . $className . '.php';

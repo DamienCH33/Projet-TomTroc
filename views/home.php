@@ -19,60 +19,28 @@
         </div>
     </section>
     <section class="homeTwo py-5">
-        <div class="container-fluid mt-5">
-            <div class="row align-items-center justify-content-center g-5">
-                <h1 class="w-100 text-center mb-4">Les derniers livres ajoutés</h1>
-                <div class="col-auto">
-                    <div class="card">
-                        <a href="detailBook.php">
-                            <img class="card-img-top" src="images/hamza-nouasria.png" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Esther</h5>
-                            <p class="card-text">Alabaster</p>
-                            <p class="card-sell">Vendu par : CamilleClubLit</p>
+        <div class="container mt-5">
+            <h1 class="w-100 text-center mb-4">Les derniers livres ajoutés</h1>
+
+            <div class="row justify-content-center gx-4 gy-4">
+                <?php foreach (array_slice($books, 0, 4) as $book): ?>
+                    <div class="col-auto">
+                        <div class="card shadow-sm border-0 mx-auto">
+                            <a href="detailBook.php">
+                                <img class="card-img-top" src="<?= htmlspecialchars($book->getImages()) ?>" alt="<?= htmlspecialchars($book->getTitle()) ?>" style="height: 200px; object-fit: cover;">
+                            </a>
+                            <div class="card-body text-start">
+                                <h5 class="card-title"><?= htmlspecialchars($book->getTitle()) ?></h5>
+                                <p class="card-text"><?= htmlspecialchars($book->getAuthor()) ?></p>
+                                <p class="card-sell">Vendu par : <?= htmlspecialchars($book->getSellBy()) ?></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-auto">
-                    <div class="card">
-                        <a href="detailBook.php">
-                            <img class="card-img-top" src="images/hamza-nouasria.png" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Esther</h5>
-                            <p class="card-text">Alabaster</p>
-                            <p class="card-sell">Vendu par : CamilleClubLit</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <div class="card">
-                        <a href="detailBook.php">
-                            <img class="card-img-top" src="images/hamza-nouasria.png" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Esther</h5>
-                            <p class="card-text">Alabaster</p>
-                            <p class="card-sell">Vendu par : CamilleClubLit</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <div class="card">
-                        <a href="detailBook.php">
-                            <img class="card-img-top" src="images/hamza-nouasria.png" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Esther</h5>
-                            <p class="card-text">Alabaster</p>
-                            <p class="card-sell">Vendu par : CamilleClubLit</p>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
+
             <div class="d-flex justify-content-center py-4 mt-3">
-                <a href="views/bookExchange.php" class="btn btn-primary btn-lg custom-button-reverse">Voir tous les livres</a>
+                <a href="/index.php?page=BookExchange" class="btn btn-primary btn-lg custom-button-reverse">Voir tous les livres</a>
             </div>
         </div>
     </section>

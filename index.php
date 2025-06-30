@@ -1,5 +1,6 @@
 <?php
-require_once 'config/autoload.php';
+require_once __DIR__ . '/config/config.php';
+require_once __DIR__ . '/config/autoload.php';
 
 $page = $_GET['page'] ?? 'home';
 
