@@ -28,7 +28,7 @@
                             <a class="nav-link nav-accueil" href="#">Accueil</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Nos livres à l'échange</a>
+                            <a class="nav-link" href="/index.php?page=BookExchange">Nos livres à l'échange</a>
                         </li>
                     </ul>
 

@@ -8,7 +8,7 @@
                         Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.
                     </p>
                     <p>
-                        <a href="views/bookExchange.php" class="btn btn-primary btn-lg custom-button-reverse">Découvrir</a>
+                        <a href="/index.php?page=BookExchange" class="btn btn-primary btn-lg custom-button-reverse">Découvrir</a>
                     </p>
                 </div>
                 <div class="col-md-6 mb-6">

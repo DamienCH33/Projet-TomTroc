@@ -1,6 +1,17 @@
 <?php
-require_once 'core/view.php';
-require_once 'controllers/homeController.php';
+require_once 'config/autoload.php';
 
-$controller = new HomeController();
-$controller->showHome();
+$page = $_GET['page'] ?? 'home';
+
+switch ($page) {
+    case 'BookExchange':
+        $bookController = new BookExchangeController();
+        $bookController->showBookExchange();
+        break;
+
+    case 'home':
+    default:
+        $controller = new HomeController();
+        $controller->showHome();
+        break;
+}
