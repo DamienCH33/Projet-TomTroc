@@ -1,14 +1,17 @@
 <?php
-class BookExchangeController{
+class BookExchangeController
+{
 
-public function showBookExchange(): void
+    public function showBookExchange(): void
     {
 
         $db = new Database();
         $pdo = $db->getPDO();
 
         $manager = new BookExchangeManager($pdo);
-        $books = $manager->getAllBooks();
+        
+        $search = $_GET['search'] ?? '';
+        $books = $manager->getBookBySearch($search);
 
         $view = new View('bookExchange');
         $view->render(['books' => $books]);

@@ -130,6 +130,7 @@ nav.navbar.bg-light {
   overflow: visible;
   border-radius: 0 0 0.5rem 0.5rem;
   padding: 0 !important;
+  min-height: 100%;
 }
 .card-img-top {
   height: 200px;

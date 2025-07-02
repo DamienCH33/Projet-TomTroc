@@ -28,4 +28,29 @@ class BookExchangeManager
         }
         return $books;
     }
+
+    public function getBookBySearch(string $searchTerm = ''): array
+    {
+        $sql = " SELECT * FROM books ";
+        if (!empty($searchTerm)) {
+            $sql .= "WHERE title LIKE :search 
+                OR author LIKE :search 
+                OR sell_by LIKE :search";
+        }
+        $stmt = $this->db->prepare($sql);
+
+        if (!empty($searchTerm)) {
+            $stmt->bindValue(':search', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        }
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $books = [];
+        foreach ($results as $row) {
+            $books[] = new Book($row);
+        }
+
+        return $books;
+    }
 }

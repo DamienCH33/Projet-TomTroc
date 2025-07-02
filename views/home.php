@@ -21,7 +21,6 @@
     <section class="homeTwo py-5">
         <div class="container mt-5">
             <h1 class="w-100 text-center mb-4">Les derniers livres ajoutés</h1>
-
             <div class="row justify-content-center gx-4 gy-4">
                 <?php foreach (array_slice($books, 0, 4) as $book): ?>
                     <div class="col-auto">
