@@ -19,7 +19,7 @@
                 <?php foreach ($books as $book): ?>
                     <div class="col-md-3">
                         <div class="card shadow-sm border-0">
-                            <a href="detailBook.php">
+                            <a href="index.php?page=DetailBook&id=<?= $book->getId() ?>">
                                 <img class="card-img-top" src="<?= htmlspecialchars($book->getImages()) ?>" alt="<?= htmlspecialchars($book->getTitle()) ?>" style="height: 200px; object-fit: cover;">
                             </a>
                             <div class="card-body text-start">

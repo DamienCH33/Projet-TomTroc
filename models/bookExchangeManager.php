@@ -9,12 +9,17 @@ class BookExchangeManager
         $this->db = $db;
     }
 
-    public function getBookById(int $id): array|false
-    {
-        $sql = 'SELECT * FROM books WHERE id = ?';
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+   public function getBookById(int $id): ?Book
+{
+    $sql = 'SELECT * FROM books WHERE id = ?';
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute([$id]);
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        return new Book($result);
+    }
+      return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function getAllBooks(): array
     {
