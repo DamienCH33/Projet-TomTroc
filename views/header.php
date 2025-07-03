@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <header class="custom-container-1440">
+    <header>
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="custom-container">
                 <a class="navbar-brand" href="/index.php?page=home">
@@ -48,7 +48,7 @@
                             </a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Connexion</a>
+                            <a class="nav-link" href="/index.php?page=userForm">Connexion</a>
                         </li>
                     </ul>
 

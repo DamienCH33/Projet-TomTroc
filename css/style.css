@@ -213,7 +213,11 @@ section.homeThree
 .row > .col-md-3:nth-child(4n+1) {
     clear: left;
 }
-
+.full-width-image {
+  width: 100%; 
+  height: auto;
+  display: block;
+}
 /*Detailbook*/
 .small-line {
     width: 27px;
@@ -247,9 +251,15 @@ section.homeThree
   line-height: 17px;
   margin-left: 12px;
 }
-.mt-6 {
-  margin-top: 8rem !important;
+
+/*formulaire*/
+.fixed-size-image {
+  width: 100% !important;      /* remplit toute la largeur de la colonne */
+  height: 100vh !important;    /* prend toute la hauteur de la fenêtre */
+  object-fit: cover !important; /* adapte le contenu sans déformer */
+  display: block !important;
 }
+
 
 /*footer*/
 footer.footer {

@@ -1,4 +1,4 @@
-<div class="custom-container-1440">
+<div>
     <section class="homeOne py-5">
         <div class="container-fluid mt-5">
             <div class="row align-items-center">
@@ -83,7 +83,9 @@
                     <a href="views/bookExchange.php" class="btn btn-primary btn-lg custom-button">Voir tous les livres</a>
                 </div>
             </div>
-            <img class="img-fluid py-5" src="images/banner-home.png" alt="Femme qui cherche un livre sur des étagères">
+            <div>
+                <img class="img-fluid full-width-image py-5" src="images/banner-home.png" alt="Femme qui cherche un livre sur des étagères">
+            </div>        
         </div>
         <div class="container-fluid">
             <div class="row justify-content-center text-center mb-5">
