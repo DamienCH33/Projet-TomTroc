@@ -30,6 +30,14 @@ switch ($page) {
             $userController->showInscriptionForm();
         }
         break;
+    case 'myAccount':
+        $userController = new UserController($userManager);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userController->logInUser();
+        } else {
+            $userController->showMyAccount();
+        }
+        break;
     case 'home':
     default:
         $controller = new HomeController();

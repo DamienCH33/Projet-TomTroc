@@ -13,7 +13,7 @@
         <section class="col-md-6 d-flex flex-column justify-content-center align-items-center bg-light">
             <div class="w-50">
                 <h1 class="mb-4">Connexion</h1>
-                <form method="POST" action="index.php?page=userForm">
+                <form method="POST" action="index.php?page=myAccount">
                     <div class="mb-3">
                         <label for="email" class="form-label">Adresse email</label>
                         <input type="email" id="email" name="email" class="form-control" required />
@@ -24,11 +24,11 @@
                         <input type="password" id="password" name="password" class="form-control" required />
                     </div>
 
-                    <button type="submit" class="btn btn-success w-100 mb-3">S’inscrire</button>
+                    <button type="submit" class="btn btn-success w-100 mb-3">Se connecter</button>
                 </form>
 
                 <p class="text-left">
-                    Pas de compte ? <a href="/index.php?page=userForm">Inscrivez-vous</a>
+                    Pas de compte ? <a href="/index.php?page=userForm">S’inscrire</a>
                 </p>
             </div>
         </section>

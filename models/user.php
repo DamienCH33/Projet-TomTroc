@@ -2,18 +2,29 @@
 
 class User
 {
+    private int $id;
+    private string $email;
     private string $pseudo;
-    private string $login;
     private string $password;
     private DateTime $createdAt;
+
     public function __construct(array $data = [])
     {
         if (!empty($data)) {
+            $this->id = $data['id'];
+            $this->email = $data['email'];
             $this->pseudo = $data['pseudo'];
-            $this->login = $data['login'];
             $this->password = $data['password'];
-            $this->createdAt = $data['createdAt'];
+            $this->createdAt = new DateTime($data['created_at']);
         }
+    }
+    public function getId(): int
+    {
+        return $this->id;
+    }
+    public function getEmail(): string
+    {
+        return $this->email;
     }
     public function setPseudo(string $pseudo): void
     {
@@ -23,14 +34,6 @@ class User
     {
         return $this->pseudo;
     }
-    public function setLogin(string $login): void
-    {
-        $this->login = $login;
-    }
-    public function getLogin(): string
-    {
-        return $this->login;
-    }
     public function setPassword(string $password): void
     {
         $this->password = $password;
@@ -39,11 +42,11 @@ class User
     {
         return $this->password;
     }
-     public function setCreatedAt(string $createdAt): void
+    public function setCreatedAt(string $createdAt): void
     {
-        $this->password = $createdAt;
+        $this->createdAt = new DateTime($createdAt);
     }
-    public function getreatedAt(): DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }

@@ -10,13 +10,18 @@ class UserController
     }
     public function showInscriptionForm(): void
     {
-        $view = new View("form/userForm");
+        $view = new View("user/userForm");
         $view->render(['action' => 'inscription']);
     }
     public function showLoginForm(): void
     {
-        $view = new View("form/loginForm");
+        $view = new View("user/loginForm");
         $view->render(['action' => 'connexion']);
+    }
+    public function showMyAccount(): void
+    {
+        $view = new View("user/myAccount");
+        $view->render(['action' => 'account']);
     }
     public function signUpUser()
 
@@ -51,7 +56,7 @@ class UserController
 
         if ($result) {
             $_SESSION['message'] = "Inscription réussie ! Vous pouvez vous connecter.";
-            header("Location: /index.php?page=userForm");
+            header("Location: /index.php?page=loginForm");
             exit();
         } else {
             $_SESSION['message'] = "Erreur lors de l'inscription. Veuillez réessayer.";
@@ -59,5 +64,45 @@ class UserController
             header("Location: /index.php?page=userForm");
             exit();
         }
+    }
+    public function logInUser()
+    {
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
+
+        if (empty($email) || empty($password)) {
+            $_SESSION['message'] = "Veuillez remplir tous les champs.";
+            header("Location: /index.php?page=loginForm");
+            exit();
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['message'] = "Le format de l'email n'est pas valide.";
+            header("Location: /index.php?page=loginForm");
+            exit();
+        }
+        $user = $this->userManager->getUserByEmail($email);
+        if (!$user) {
+            $_SESSION['message'] = "Aucun utilisateur trouvé avec cet email.";
+            header("Location: /index.php?page=loginForm");
+            exit();
+        }
+        if (!password_verify($password, $user->getPassword())) {
+            $_SESSION['message'] = "Le mot de passe est incorrect.";
+            header("Location: /index.php?page=loginForm");
+            exit();
+        }
+        $_SESSION['userId'] = $user->getId();
+        $_SESSION['userEmail'] = $user->getEmail();
+
+        header("Location: /index.php?page=myAccount");
+        exit();
+    }
+    public function disconnectUser(): void
+    {
+        unset($_SESSION['userEmail']);
+        unset($_SESSION['userId']);
+
+        header("Location: /index.php?page=home");
+        exit;
     }
 }
