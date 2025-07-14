@@ -25,7 +25,7 @@
                 <?php foreach (array_slice($books, 0, 4) as $book): ?>
                     <div class="col-auto">
                         <div class="card shadow-sm border-0 mx-auto">
-                            <a href="detailBook.php">
+                            <a href="index.php?page=DetailBook&id=<?= $book->getId() ?>">
                                 <img class="card-img-top" src="<?= htmlspecialchars($book->getImages()) ?>" alt="<?= htmlspecialchars($book->getTitle()) ?>" style="height: 200px; object-fit: cover;">
                             </a>
                             <div class="card-body text-start">

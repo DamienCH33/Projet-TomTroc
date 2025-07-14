@@ -10,8 +10,13 @@ class UserController
     }
     public function showInscriptionForm(): void
     {
-        $view = new View("userForm");
+        $view = new View("form/userForm");
         $view->render(['action' => 'inscription']);
+    }
+    public function showLoginForm(): void
+    {
+        $view = new View("form/loginForm");
+        $view->render(['action' => 'connexion']);
     }
     public function signUpUser()
 

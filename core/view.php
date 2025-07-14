@@ -19,6 +19,6 @@ class View
         require $this->viewFile;
         $content = ob_get_clean();
 
-        require __DIR__ . '/../views/layout.php';
+        require __DIR__ . '/../views/parts/_layout.php';
     }
 }

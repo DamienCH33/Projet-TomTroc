@@ -11,12 +11,16 @@ $page = $_GET['page'] ?? 'home';
 
 switch ($page) {
     case 'DetailBook':
-        $bookController = new DetailBookController();
+        $bookController = new BookController();
         $bookController->showDetailBook();
         break;
     case 'BookExchange':
-        $bookController = new BookExchangeController();
+        $bookController = new BookController();
         $bookController->showBookExchange();
+        break;
+        case 'loginForm':
+        $userController = new UserController($userManager);
+        $userController->showLoginForm();
         break;
     case 'userForm':
         $userController = new UserController($userManager);
