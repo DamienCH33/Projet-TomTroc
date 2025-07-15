@@ -63,6 +63,9 @@ class UserManager
             ]);
         }
     }
+
+
+    
     /*public function updatePicture(int $id, string $picture)
     {
         $sql = "UPDATE user SET picture = :picture WHERE id = :id";

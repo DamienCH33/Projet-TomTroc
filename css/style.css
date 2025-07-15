@@ -218,6 +218,15 @@ section.homeThree
   height: auto;
   display: block;
 }
+/*book exchange*/
+.availability-badge.unavailable {
+    background-color: #C56D6D !important;
+    color: #fff !important; 
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
 /*Detailbook*/
 .small-line {
     width: 27px;

@@ -19,14 +19,22 @@
                 <?php foreach ($books as $book): ?>
                     <div class="col-md-3">
                         <div class="card shadow-sm border-0">
-                            <a href="index.php?page=DetailBook&id=<?= $book->getId() ?>">
+                            <a href="index.php?page=DetailBook&id=<?= $book->getId() ?>" class="position-relative d-block">
                                 <img class="card-img-top" src="<?= htmlspecialchars($book->getImages()) ?>" alt="<?= htmlspecialchars($book->getTitle()) ?>" style="height: 200px; object-fit: cover;">
+
+                                <?php $availability = strtolower(trim($book->getAvailable() ?? ''));
+
+                                if ($availability !== '' && $availability !== 'disponible'): ?>
+                                    <span class="availability-badge unavailable position-absolute top-0 end-0 m-2">
+                                        <?= htmlspecialchars($book->getAvailable()) ?>
+                                    </span>
+                                <?php endif; ?>
                             </a>
                             <div class="card-body text-start">
                                 <h5 class="card-title"><?= htmlspecialchars($book->getTitle()) ?></h5>
                                 <p class="card-text"><?= htmlspecialchars($book->getAuthor()) ?></p>
                                 <p class="card-sell">Vendu par : <?= htmlspecialchars($book->getSellBy()) ?></p>
-                                <p class="card-available"><?= htmlspecialchars($book->getAvailable()) ?></p>
+
                             </div>
                         </div>
                     </div>
