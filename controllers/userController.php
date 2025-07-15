@@ -8,6 +8,14 @@ class UserController
     {
         $this->userManager = $userManager;
     }
+    protected function checkIfUserIsConnected(): void
+    {
+        if (empty($_SESSION['userEmail'])) {
+            $_SESSION['message'] = "Accès refusé. Veuillez vous connecter.";
+            header("Location: index.php?page=loginForm");
+            exit();
+        }
+    }
     public function showInscriptionForm(): void
     {
         $view = new View("user/userForm");
@@ -20,8 +28,18 @@ class UserController
     }
     public function showMyAccount(): void
     {
+        $this->checkIfUserIsConnected();
+
+        $email = $_SESSION['userEmail'];
+
+        $db = new Database();
+        $pdo = $db->getPDO();
+
+        $manager = new UserManager($pdo);
+        $user = $manager->getUserByEmail($email);
+
         $view = new View("user/myAccount");
-        $view->render(['action' => 'account']);
+        $view->render(['user' => $user]);
     }
     public function signUpUser()
 
@@ -105,4 +123,54 @@ class UserController
         header("Location: /index.php?page=home");
         exit;
     }
+
+    public function updateUserProfile()
+    {
+        $this->checkIfUserIsConnected();
+
+        $pseudo = trim($_POST['pseudo']);
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
+
+        if (empty($pseudo) || empty($email)) {
+            $_SESSION['message'] = "Veuillez remplir tous les champs.";
+            header("Location: /index.php?page=userForm");
+            exit();
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['message'] = "Le format de l'email n'est pas valide.";
+            header("Location: /index.php?page=loginForm");
+            exit();
+        }
+
+        $id = $_SESSION['userId'];
+        $hashPassword = !empty($password) ? password_hash($password, PASSWORD_DEFAULT) : null;
+       
+        $success =  $this->userManager->updateUser($id, $pseudo, $email, $hashPassword);
+
+        if ($success) {
+                $_SESSION['userEmail'] = $email;
+                $_SESSION['message'] = "Votre compte a été mis à jour avec succès.";
+            } else {
+                $_SESSION['message'] = "Une erreur s'est produite lors de la mise à jour de votre compte.";
+        }
+        header("Location: /index.php?page=myAccount");
+        exit();
+    }
+    /*public function updatePictureProfile(){
+        $this->checkIfUserIsConnected();
+        $id = $_SESSION['userId'];
+        $picture = $_SESSION['userPicture'];
+
+        $success = $this->userManager->updatePicture($id, $picture);
+        if ($success) {
+                $_SESSION['userPicture'] = $picture;
+                $_SESSION['message'] = "Votre photo de profil a été mis à jour avec succès.";
+            } else {
+                $_SESSION['message'] = "Une erreur s'est produite lors de la mise à jour de votre compte.";
+        }
+        header("Location: /index.php?page=myAccount");
+        exit();
+    }*/
 }

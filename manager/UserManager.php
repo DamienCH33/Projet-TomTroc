@@ -41,4 +41,35 @@ class UserManager
         $stmt->execute([':pseudo' => $pseudo]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function updateUser(int $id, string $pseudo, string $email, ?string $password)
+    {
+        if ($password) {
+            $sql = "UPDATE user SET email = :email, password = :password, pseudo = :pseudo WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([
+                'id' => $id,
+                'email' => $email,
+                'password' => $password,
+                'pseudo' => $pseudo
+            ]);
+        } else {
+            $sql = "UPDATE user SET email = :email, pseudo = :pseudo WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([
+                'id' => $id,
+                'email' => $email,
+                'pseudo' => $pseudo
+            ]);
+        }
+    }
+    /*public function updatePicture(int $id, string $picture)
+    {
+        $sql = "UPDATE user SET picture = :picture WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            'picture' => $picture,
+            'id' => $id
+        ]);
+    }*/
 }

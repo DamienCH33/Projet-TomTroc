@@ -50,4 +50,23 @@ class User
     {
         return $this->createdAt;
     }
+    public function getAccountAge(): string
+    {
+        $now = new DateTime();
+        $interval = $this->createdAt->diff($now);
+
+        if ($interval->y > 0) {
+            return $interval->y . ' an' . ($interval->y > 1 ? 's' : '');
+        } elseif ($interval->m > 0) {
+            return $interval->m . ' mois';
+        } elseif ($interval->d > 0) {
+            return $interval->d . ' jour' . ($interval->d > 1 ? 's' : '');
+        } elseif ($interval->h > 0) {
+            return $interval->h . ' heure' . ($interval->h > 1 ? 's' : '');
+        } elseif ($interval->i > 0) {
+            return $interval->i . ' minute' . ($interval->i > 1 ? 's' : '');
+        } else {
+            return "quelques secondes";
+        }
+    }
 }

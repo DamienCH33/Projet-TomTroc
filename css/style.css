@@ -254,11 +254,120 @@ section.homeThree
 
 /*formulaire*/
 .fixed-size-image {
-  width: 100% !important;      /* remplit toute la largeur de la colonne */
-  height: 100vh !important;    /* prend toute la hauteur de la fenêtre */
-  object-fit: cover !important; /* adapte le contenu sans déformer */
+  width: 100% !important;
+  height: 100vh !important; 
+  object-fit: cover !important; 
   display: block !important;
 }
+/*my account*/
+.profile-card {
+  width: 547px;
+  height: 508px;
+  background: var(--footerColor);
+  border-radius: 20px;
+  text-align: center;
+}
+.profile-card small {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+.library-icon {
+  font-size: 1.2rem;
+  vertical-align: middle;
+  margin-right: 5px;
+  color: #28a745;
+}
+.availability-badge.available {
+  background-color: #d4edda;
+  color: #155724;
+  font-size: 0.8rem;
+  padding: 0.25em 0.5em;
+  border-radius: 1rem;
+  text-transform: lowercase;
+  user-select: none;
+}
+.availability-badge.unavailable {
+  background-color: #f8d7da;
+  color: #CB2D2D;
+  font-size: 0.8rem;
+  padding: 0.25em 0.5em;
+  border-radius: 1rem;
+  text-transform: lowercase;
+  user-select: none;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #EDF2F6;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #FFFFFF;
+}
+.form-control{
+width: 322px;
+height: 50px;
+border-radius: 6px;
+opacity: 1;
+border-width: 1px;
+border: 1px solid #F0F0F0;
+background: #EDF2F6;
+}
+
+.form-global{
+  align-items: center;
+}
+
+.section-title {
+  width: 547px;
+  text-align: left;
+  margin-left: 200px;
+}
+
+.profile-section,
+.form-section {
+  width: 547px;
+  height: 508px;
+}
+
+.profile-img {
+  width: 135px;
+  height: 135px;
+  object-fit: cover;
+}
+
+.modifier-link {
+  color: #A6A6A6;
+  text-decoration: none;
+}
+
+.separator {
+  width: 242px;
+  border-bottom: 1px solid #F5F3EF;
+}
+
+.livre-icon {
+  width: 10.41px;
+  height: 13.71px;
+}
+
+.table-wrapper {
+  width: 1140px;
+  height: 579px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.action-link {
+  color: #292929;
+  margin-right: 10px;
+}
+
+.action-link-delete {
+  color: #C56D6D;
+}
+
+
 
 
 /*footer*/
