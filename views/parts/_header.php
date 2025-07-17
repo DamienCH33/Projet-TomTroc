@@ -42,7 +42,7 @@
                             </a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link d-flex align-items-center" href="#">
+                            <a class="nav-link d-flex align-items-center" href="index.php?page=myAccount">
                                 <img src="images/Icon_myaccount.png" alt="Mon compte" class="icon-nav">
                                 Mon compte
                             </a>

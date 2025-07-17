@@ -41,6 +41,26 @@ class UserController
         $view = new View("user/myAccount");
         $view->render(['user' => $user]);
     }
+
+    public function showUserProfile()
+    {
+        $db = new Database();
+        $pdo = $db->getPDO();
+       
+        $pseudo = $_GET['pseudo'] ?? null;
+
+        $manager = new UserManager($pdo);
+        $user = $manager->getUserByPseudo($pseudo);
+
+        $view = new View("user/publicAccount");
+        $view->render(['user' => $user]);
+        if (!$user) {
+
+            $view = new View("error/notFound");
+            $view->render(["message" => "Utilisateur introuvable"]);
+            return;
+        }
+    }
     public function signUpUser()
 
     {
@@ -146,14 +166,14 @@ class UserController
 
         $id = $_SESSION['userId'];
         $hashPassword = !empty($password) ? password_hash($password, PASSWORD_DEFAULT) : null;
-       
+
         $success =  $this->userManager->updateUser($id, $pseudo, $email, $hashPassword);
 
         if ($success) {
-                $_SESSION['userEmail'] = $email;
-                $_SESSION['message'] = "Votre compte a été mis à jour avec succès.";
-            } else {
-                $_SESSION['message'] = "Une erreur s'est produite lors de la mise à jour de votre compte.";
+            $_SESSION['userEmail'] = $email;
+            $_SESSION['message'] = "Votre compte a été mis à jour avec succès.";
+        } else {
+            $_SESSION['message'] = "Une erreur s'est produite lors de la mise à jour de votre compte.";
         }
         header("Location: /index.php?page=myAccount");
         exit();

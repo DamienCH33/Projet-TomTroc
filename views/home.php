@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-center mt-4">
-                    <a href="views/bookExchange.php" class="btn btn-primary btn-lg custom-button">Voir tous les livres</a>
+                    <a href="/index.php?page=BookExchange" class="btn btn-primary btn-lg custom-button">Voir tous les livres</a>
                 </div>
             </div>
             <div>

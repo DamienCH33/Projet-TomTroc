@@ -7,7 +7,7 @@
 <div class="container-fluid homeOne py-5">
     <div class="d-flex flex-column align-items-left">
         <div class="section-title">
-            <h1 class="mb-4">Mon compte</h1>
+            <h1 class="mb-0 text-start mb-3">Mon compte</h1>
         </div>
         <div class="d-flex justify-content-center gap-5">
             <!-- Section 1 (profil) -->

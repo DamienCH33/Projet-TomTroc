@@ -21,24 +21,27 @@ switch ($page) {
         $bookController->showBookExchange();
         break;
     case 'loginForm':
-            $userController->showLoginForm();
+        $userController->showLoginForm();
+        break;
+    case 'publicAccount':
+        $userController->showUserProfile();
         break;
     case 'userForm':
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userController->signUpUser();
         } else {
             $userController->showInscriptionForm();
         }
         break;
     case 'myAccount':
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userController->logInUser();
         } else {
             $userController->showMyAccount();
         }
         break;
     case 'updateAccount':
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userController->updateUserProfile();
         } else {
             header("Location: index.php?page=myAccount");
