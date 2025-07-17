@@ -30,7 +30,7 @@
 
                     <div class="mb-3 text-start">
                         <label for="email" class="form-label small">Adresse email</label>
-                        <input type="email" id="email" name="email" class="form-control"/>
+                        <input type="email" id="email" name="email" class="form-control" />
                     </div>
 
                     <div class="mb-3 text-start">
@@ -40,7 +40,7 @@
 
                     <div class="mb-3 text-start">
                         <label for="pseudo" class="form-label small">Pseudo</label>
-                        <input type="text" id="pseudo" name="pseudo" class="form-control"/>
+                        <input type="text" id="pseudo" name="pseudo" class="form-control" />
                     </div>
 
                     <div class="text-center pt-2">
@@ -66,17 +66,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><img src="https://via.placeholder.com/70x80" alt="book" class="img-fluid rounded"></td>
-                    <td>The Kinkfolk Table</td>
-                    <td>Nathan Williams</td>
-                    <td><em>J'ai récemment plongé dans les pages de</em></td>
-                    <td><span class="availability-badge available">disponible</span></td>
-                    <td>
-                        <a href="#" class=" action-link">Éditer</a>
-                        <a href="#" class=" action-link-delete">Supprimer</a>
-                    </td>
-                </tr>
+
+                <?php
+                /** @var Book $book */
+                foreach ($books as $book) { ?>
+                    <tr id="liste-livres">
+                        <td><img src="<?= htmlspecialchars($book->getImages()) ?>" alt="book" class="img-fluid rounded"></td>
+                        <td><?= htmlspecialchars($book->getTitle()) ?></td>
+                        <td><?= htmlspecialchars($book->getAuthor()) ?></td>
+                        <td><?= htmlspecialchars($book->getDescription()) ?></td>
+                        <td><span class="availability-badge available"><?= htmlspecialchars($book->getAvailable()) ?></span></td>
+                        <td>
+                            <a href="/index.php?page=updateBook&id=<?= $book->getId() ?>" class=" action-link">Éditer</a>
+                            <a href="#" class=" action-link-delete">Supprimer</a>
+                        </td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>

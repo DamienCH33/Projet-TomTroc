@@ -20,6 +20,9 @@ switch ($page) {
     case 'BookExchange':
         $bookController->showBookExchange();
         break;
+    case 'updateBook':
+        $bookController->showUpdateBook();
+        break;
     case 'loginForm':
         $userController->showLoginForm();
         break;

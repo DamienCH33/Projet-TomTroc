@@ -1,8 +1,8 @@
 <div>
-    <section class="homeOne py-5">
-        <div class="container-fluid mt-5">
-            <div class="row align-items-center">
-                <div class="col-md-4 offset-md-1 home">
+    <div class="container-fluid homeOne">
+        <section>
+            <div class="row justify-content-center align-items-center ">
+                <div class="col-3">
                     <h1>Rejoignez nos <br>lecteurs passionnés</h1>
                     <p class="limited-width">Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture.
                         Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.
@@ -11,9 +11,21 @@
                         <a href="/index.php?page=BookExchange" class="btn btn-primary btn-lg custom-button-reverse">Découvrir</a>
                     </p>
                 </div>
-                <div class="col-md-6 mb-6">
-                    <img src="images/hamza-nouasria.png" alt="Un homme qui lit assis">
+                <div class="col-3 text-end">
+                    <img width="100%" src="images/hamza-nouasria.png" alt="Un homme qui lit assis">
                     <p class="picturename">Hamza</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <section class="homeOne py-5">
+        <div class="container-fluid mt-5">
+            <div class="row align-items-center ml-230">
+                <div class="col-md-4 offset-md-1 home">
+
+                </div>
+                <div class="col-md-6 mb-6">
+
                 </div>
             </div>
         </div>
@@ -85,7 +97,7 @@
             </div>
             <div>
                 <img class="img-fluid full-width-image py-5" src="images/banner-home.png" alt="Femme qui cherche un livre sur des étagères">
-            </div>        
+            </div>
         </div>
         <div class="container-fluid">
             <div class="row justify-content-center text-center mb-5">

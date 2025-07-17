@@ -38,15 +38,21 @@ class UserController
         $manager = new UserManager($pdo);
         $user = $manager->getUserByEmail($email);
 
+        $bookManager = new BookExchangeManager($pdo);
+        $books = $bookManager->getBooksByUser($user);
+
         $view = new View("user/myAccount");
-        $view->render(['user' => $user]);
+        $view->render([
+            'user' => $user,
+            'books' => $books,
+        ]);
     }
 
     public function showUserProfile()
     {
         $db = new Database();
         $pdo = $db->getPDO();
-       
+
         $pseudo = $_GET['pseudo'] ?? null;
 
         $manager = new UserManager($pdo);
