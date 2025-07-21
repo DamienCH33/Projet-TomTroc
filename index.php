@@ -24,10 +24,13 @@ switch ($page) {
         $bookController->showUpdateBook();
         break;
     case 'updateBookSubmit':
-    $bookController->updateBookProfile();
-    break;
+        $bookController->updateBookProfile();
+        break;
     case 'loginForm':
         $userController->showLoginForm();
+        break;
+    case 'logout':
+        $userController->logout();
         break;
     case 'publicAccount':
         $userController->showUserProfile();

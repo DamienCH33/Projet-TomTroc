@@ -41,16 +41,27 @@
                                 Messagerie
                             </a>
                         </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link d-flex align-items-center" href="index.php?page=myAccount">
-                                <img src="images/Icon_myaccount.png" alt="Mon compte" class="icon-nav">
-                                Mon compte
-                            </a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="/index.php?page=userForm">Connexion</a>
-                        </li>
+
+                        <?php if (isset($_SESSION['user'])): ?>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link d-flex align-items-center" href="index.php?page=myAccount">
+                                    <img src="images/Icon_myaccount.png" alt="Mon compte" class="icon-nav">
+                                    Mon compte
+                                </a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a href="index.php?page=logout" class="nav-link"
+                                    onclick="return confirm('Voulez-vous vraiment vous déconnecter ?');">
+                                    Déconnexion
+                                </a>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link" href="index.php?page=userForm">Connexion</a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
+
 
                 </div>
             </div>

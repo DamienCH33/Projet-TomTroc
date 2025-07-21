@@ -10,12 +10,13 @@ class UserController
     }
     protected function checkIfUserIsConnected(): void
     {
-        if (empty($_SESSION['userEmail'])) {
+        if (empty($_SESSION['user']) || empty($_SESSION['user']['email'])) {
             $_SESSION['message'] = "Accès refusé. Veuillez vous connecter.";
             header("Location: index.php?page=loginForm");
             exit();
         }
     }
+
     public function showInscriptionForm(): void
     {
         $view = new View("user/userForm");
@@ -30,7 +31,7 @@ class UserController
     {
         $this->checkIfUserIsConnected();
 
-        $email = $_SESSION['userEmail'];
+        $email = $_SESSION['user']['email'];
 
         $db = new Database();
         $pdo = $db->getPDO();
@@ -135,18 +136,20 @@ class UserController
             header("Location: /index.php?page=loginForm");
             exit();
         }
-        $_SESSION['userId'] = $user->getId();
-        $_SESSION['userEmail'] = $user->getEmail();
+        $_SESSION['user'] = [
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+            'pseudo' => $user->getPseudo(),
+        ];
 
         header("Location: /index.php?page=myAccount");
         exit();
     }
-    public function disconnectUser(): void
+    public function logout(): void
     {
-        unset($_SESSION['userEmail']);
-        unset($_SESSION['userId']);
-
-        header("Location: /index.php?page=home");
+        session_unset();
+        session_destroy();
+        header('Location: index.php?page=loginForm');
         exit;
     }
 
