@@ -32,7 +32,7 @@ class UserController
         $this->checkIfUserIsConnected();
 
         $email = $_SESSION['user']['email'];
-
+  
         $db = new Database();
         $pdo = $db->getPDO();
 
@@ -42,10 +42,13 @@ class UserController
         $bookManager = new BookExchangeManager($pdo);
         $books = $bookManager->getBooksByUser($user);
 
+        $nbBooks = $bookManager->countBookByUser($user->getId());
+
         $view = new View("user/myAccount");
         $view->render([
             'user' => $user,
             'books' => $books,
+            'nbBooks' => $nbBooks,
         ]);
     }
 
@@ -69,7 +72,6 @@ class UserController
         }
     }
     public function signUpUser()
-
     {
         $pseudo = trim($_POST['pseudo']);
         $email = trim($_POST['email']);

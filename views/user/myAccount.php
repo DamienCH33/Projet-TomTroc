@@ -20,7 +20,7 @@
                 <p class="mb-1">BIBLIOTHÈQUE</p>
                 <p class="text-muted d-flex align-items-center">
                     <img src="images/logoLivre.png" alt="Livre" class="me-2 livre-icon">
-                    4 livres
+                    <?= $nbBooks ?> livre(s)
                 </p>
             </div>
             <!-- Section 2 (infos personnelles) -->
@@ -30,7 +30,7 @@
 
                     <div class="mb-3 text-start">
                         <label for="email" class="form-label small">Adresse email</label>
-                        <input type="email" id="email" name="email" class="form-control" />
+                        <input type="email" id="email" name="email" value="<?= htmlspecialchars($user->getEmail()) ?>" class="form-control" />
                     </div>
 
                     <div class="mb-3 text-start">
@@ -40,7 +40,7 @@
 
                     <div class="mb-3 text-start">
                         <label for="pseudo" class="form-label small">Pseudo</label>
-                        <input type="text" id="pseudo" name="pseudo" class="form-control" />
+                        <input type="text" id="pseudo" name="pseudo" value="<?= htmlspecialchars($user->getPseudo()) ?>" class="form-control" />
                     </div>
 
                     <div class="text-center pt-2">

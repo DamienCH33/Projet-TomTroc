@@ -84,4 +84,12 @@ class BookExchangeManager
             'available' => $book->getAvailable(),
         ]);
     }
+    public function countBookByUser(int $userId): int
+    {
+        $sql = "SELECT COUNT(*) FROM books WHERE id_user = :userId";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        return (int) $stmt->fetchColumn();
+    }
 }
