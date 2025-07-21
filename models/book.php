@@ -48,4 +48,33 @@ class Book
     {
         return $this->description;
     }
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+    public function setAuthor(string $author): void
+    {
+        $this->author = $author;
+    }
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+    public function setAvailable(string $available): void
+    {
+        $this->available = $available;
+    }
+    public function isAvailable(): bool
+    {
+        return in_array(strtolower(trim($this->available)), ['1', 'disponible'], true);
+    }
+    public function getAvailableLabel(): string
+    {
+        return $this->isAvailable() ? 'Disponible' : 'Non disponible';
+    }
+
+    public function getAvailableClass(): string
+    {
+        return $this->isAvailable() ? 'available' : 'unavailable';
+    }
 }

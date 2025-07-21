@@ -81,7 +81,7 @@ class BookExchangeManager
             'title' => $book->getTitle(),
             'author' => $book->getAuthor(),
             'description' => $book->getDescription(),
-            'available' => $book->getAvailable()
+            'available' => $book->getAvailable(),
         ]);
     }
 }

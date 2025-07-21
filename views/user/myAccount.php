@@ -75,7 +75,11 @@
                         <td><?= htmlspecialchars($book->getTitle()) ?></td>
                         <td><?= htmlspecialchars($book->getAuthor()) ?></td>
                         <td><?= htmlspecialchars($book->getDescription()) ?></td>
-                        <td><span class="availability-badge available"><?= htmlspecialchars($book->getAvailable()) ?></span></td>
+                        <td>
+                            <span class="availability-badge <?= $book->getAvailableClass() ?>">
+                                <?= $book->getAvailableLabel() ?>
+                            </span>
+                        </td>
                         <td>
                             <a href="/index.php?page=updateBook&id=<?= $book->getId() ?>" class=" action-link">Éditer</a>
                             <a href="#" class=" action-link-delete">Supprimer</a>

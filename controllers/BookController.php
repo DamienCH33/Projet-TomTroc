@@ -48,4 +48,38 @@ class BookController
         $view = new View('bookPage/updateBook');
         $view->render(['book' => $book]);
     }
+    public function updateBookProfile()
+    {
+        $id = $_POST['id'] ?? null;
+        $title = trim($_POST['title'] ?? '');
+        $author = trim($_POST['author'] ?? '');
+        $description = trim($_POST['description'] ?? '');
+        $available = $_POST['available'] ?? null;
+
+        if (!$id || empty($title) || empty($author) || empty($description) || !in_array($available, ['0', '1'])) {
+            $_SESSION['message'] = "Veuillez remplir correctement tous les champs.";
+            header("Location: /index.php?page=updateBook&id=" . urlencode($id));
+            exit();
+        }
+        $db = new Database();
+        $pdo = $db->getPDO();
+        $manager = new BookExchangeManager($pdo);
+        $book = $manager->getBookById((int) $id);
+
+        if (!$book) {
+            $_SESSION['message'] = "Livre introuvable.";
+            header("Location: /index.php?page=BookExchange");
+            exit();
+        }
+        $book->setTitle($title);
+        $book->setAuthor($author);
+        $book->setDescription($description);
+        $book->setAvailable($available);
+
+        $manager->updateBook($book);
+
+        $_SESSION['message'] = "Livre mis à jour avec succès.";
+        header("Location: /index.php?page=DetailBook&id=" . $book->getId());
+        exit();
+    }
 }

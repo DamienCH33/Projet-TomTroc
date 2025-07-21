@@ -23,6 +23,9 @@ switch ($page) {
     case 'updateBook':
         $bookController->showUpdateBook();
         break;
+    case 'updateBookSubmit':
+    $bookController->updateBookProfile();
+    break;
     case 'loginForm':
         $userController->showLoginForm();
         break;
