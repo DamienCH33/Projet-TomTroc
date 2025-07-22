@@ -96,7 +96,10 @@
                         <td>
                             <div class="livre-actions">
                                 <a href="/index.php?page=updateBook&id=<?= $book->getId() ?>" class="action-link">Éditer</a>
-                                <a href="#" class="action-link-delete">Supprimer</a>
+                                <form action="/index.php?page=deleteBook" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');" style="display:inline;">
+                                    <input type="hidden" name="id" value="<?= $book->getId() ?>">
+                                    <button type="submit" class="action-link-delete btn btn-link p-0 m-0">Supprimer</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

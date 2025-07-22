@@ -32,7 +32,7 @@ class UserController
         $this->checkIfUserIsConnected();
 
         $email = $_SESSION['user']['email'];
-  
+
         $db = new Database();
         $pdo = $db->getPDO();
 
@@ -188,6 +188,25 @@ class UserController
         }
         header("Location: /index.php?page=myAccount");
         exit();
+    }
+    public function deleteBookUserProfile()
+    {
+        $this->checkIfUserIsConnected();
+        $db = new Database();
+        $pdo = $db->getPDO();
+        if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+            $id = (int)$_POST['id'];
+            $bookManager = new BookExchangeManager($pdo);
+
+            if ($bookManager->deleteBookByUser($id)) {
+                $_SESSION['message'] = "Livre supprimé avec succès.";
+            } else {
+                $_SESSION['message'] = "Erreur lors de la suppression du livre.";
+            }
+
+            header('Location: /index.php?page=myAccount');
+            exit;
+        }
     }
     /*public function updatePictureProfile(){
         $this->checkIfUserIsConnected();
