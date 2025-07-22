@@ -54,7 +54,7 @@
 <!-- Section 3 : tableau -->
 <div class="container-fluid homeThree py-3">
     <div class="table-wrapper table-responsive bg-white rounded p-3">
-        <table class="table table-borderless align-middle mb-0">
+        <table class="table table-borderless align-middle mb-0 custom-table">
             <thead>
                 <tr class="text-uppercase small text-muted border-bottom">
                     <th scope="col">Photo</th>
@@ -69,23 +69,38 @@
 
                 <?php
                 /** @var Book $book */
-                foreach ($books as $book) { ?>
-                    <tr id="liste-livres">
-                        <td><img src="<?= htmlspecialchars($book->getImages()) ?>" alt="book" class="img-fluid rounded"></td>
-                        <td><?= htmlspecialchars($book->getTitle()) ?></td>
-                        <td><?= htmlspecialchars($book->getAuthor()) ?></td>
-                        <td><?= htmlspecialchars($book->getDescription()) ?></td>
+                foreach ($books as $book): ?>
+                    <tr>
                         <td>
-                            <span class="availability-badge <?= $book->getAvailableClass() ?>">
+                            <img src="<?= htmlspecialchars($book->getImages()) ?>" alt="book" class="rounded livre-image">
+                        </td>
+
+                        <td>
+                            <div class="livre-titre"><?= htmlspecialchars($book->getTitle()) ?></div>
+                        </td>
+
+                        <td>
+                            <div class="livre-auteur"><?= htmlspecialchars($book->getAuthor()) ?></div>
+                        </td>
+
+                        <td>
+                            <div class="livre-description"><?= htmlspecialchars($book->getDescription()) ?></div>
+                        </td>
+
+                        <td>
+                            <span class="availability-badge <?= $book->getAvailableClass() ?>" style="white-space: nowrap;">
                                 <?= $book->getAvailableLabel() ?>
                             </span>
                         </td>
+
                         <td>
-                            <a href="/index.php?page=updateBook&id=<?= $book->getId() ?>" class=" action-link">Éditer</a>
-                            <a href="#" class=" action-link-delete">Supprimer</a>
+                            <div class="livre-actions">
+                                <a href="/index.php?page=updateBook&id=<?= $book->getId() ?>" class="action-link">Éditer</a>
+                                <a href="#" class="action-link-delete">Supprimer</a>
+                            </div>
                         </td>
                     </tr>
-                <?php } ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

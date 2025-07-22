@@ -217,14 +217,7 @@ section.homeThree
   display: block;
 }
 /*book exchange*/
-.availability-badge.unavailable {
-    background-color: #C56D6D !important;
-    color: #fff !important; 
-    padding: 5px 10px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: bold;
-}
+
 /*Detailbook*/
 .small-line {
     width: 27px;
@@ -286,31 +279,63 @@ section.homeThree
   color: #28a745;
 }
 .availability-badge.available {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: #6DC5A1;
+  color: #fff;
   font-size: 0.8rem;
   padding: 0.25em 0.5em;
   border-radius: 1rem;
-  text-transform: lowercase;
-  user-select: none;
 }
 .availability-badge.unavailable {
-  background-color: #f8d7da;
-  color: #CB2D2D;
+  background-color: #C56D6D;
+  color: #fff;
   font-size: 0.8rem;
   padding: 0.25em 0.5em;
   border-radius: 1rem;
-  text-transform: lowercase;
-  user-select: none;
+ }
+
+.custom-table tbody tr:nth-child(odd) td {
+  background-color: #F5F3EF !important;
 }
 
-.table tbody tr:nth-child(even) {
-  background-color: #EDF2F6;
+.custom-table tbody tr:nth-child(even) td {
+  background-color: #EDF2F6 !important;
 }
 
-.table tbody tr:nth-child(odd) {
-  background-color: #FFFFFF;
+.table tbody tr {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
+
+.livre-description {
+  width: 128px;
+  height: auto;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+ 
+  line-clamp: 4;
+}
+
+.livre-titre, .livre-auteur {
+  display: block;
+  max-width: 130px;
+  overflow: hidden;
+ 
+}
+
+.livre-image {
+  width: 78px;
+  height: 78px;
+  object-fit: cover;
+}
+
+.livre-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .form-control{
 width: 322px;
 height: 50px;
