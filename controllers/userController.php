@@ -59,18 +59,33 @@ class UserController
 
         $pseudo = $_GET['pseudo'] ?? null;
 
+        if (!$pseudo) {
+            $_SESSION['message'] = "Aucun pseudo fourni.";
+            header("Location: /index.php?page=BookExchange");
+            exit;
+        }
+
         $manager = new UserManager($pdo);
-        $user = $manager->getUserByPseudo($pseudo);
+        $userData = $manager->getUserByPseudo($pseudo);
+        $user = new User($userData);
 
-        $view = new View("user/publicAccount");
-        $view->render(['user' => $user]);
+        $bookManager = new BookExchangeManager($pdo);
+        $books = $bookManager->getBooksByUser($user);
+        $nbBooks = $bookManager->countBookByUser($user->getId());
+
         if (!$user) {
-
             $view = new View("error/notFound");
             $view->render(["message" => "Utilisateur introuvable"]);
             return;
         }
+
+        $view = new View("user/publicAccount");
+        $view->render(['user' => $user,
+        'books' => $books,
+        'nbBooks' => $nbBooks,
+    ]);
     }
+
     public function signUpUser()
     {
         $pseudo = trim($_POST['pseudo']);

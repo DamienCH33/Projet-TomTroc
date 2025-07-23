@@ -1,16 +1,16 @@
 <?php if (!empty($_SESSION['message'])): ?>
-    <div class="alert alert-<?= $_SESSION['message_type'] ?? 'danger' ?> text-center">
-        <?= htmlspecialchars($_SESSION['message']) ?>
-    </div>
-    <?php
-    unset($_SESSION['message']);
-    unset($_SESSION['message_type']);
-    ?>
+  <div class="alert alert-<?= $_SESSION['message_type'] ?? 'danger' ?> text-center">
+    <?= htmlspecialchars($_SESSION['message']) ?>
+  </div>
+  <?php
+  unset($_SESSION['message']);
+  unset($_SESSION['message_type']);
+  ?>
 <?php endif; ?>
 
-<div class="container-fluid vh-100">
+<div class="container-fluid vh-100 bg-faf9f7">
   <div class="row h-100">
-    <section class="col-md-6 d-flex flex-column justify-content-center align-items-center bg-light">
+    <section class="col-md-6 d-flex flex-column justify-content-center align-items-center">
       <div class="w-50">
         <h1 class="mb-4">Inscription</h1>
         <form method="POST" action="index.php?page=userForm">
@@ -33,7 +33,7 @@
         </form>
 
         <p class="text-center">
-          Déjà inscrit ? <a href="/index.php?page=loginForm">Connectez-vous</a>
+          Déjà inscrit ? <a href="/index.php?page=loginForm" class="text-reset">Connectez-vous</a>
         </p>
       </div>
     </section>

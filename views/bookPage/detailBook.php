@@ -12,7 +12,7 @@
         <p>Description</p><br>
         <p><?= nl2br(htmlspecialchars($book->getDescription())) ?></p>
         <p class="mt-4">Propriétaire</p><br>
-        <a href="/index.php?page=publicAccount" class="user-badge">
+        <a href="/index.php?page=publicAccount&pseudo=<?= urlencode($book->getSellBy()) ?>" class="user-badge">
           <img src="images/Mask group.png" alt="avatar" class="avatar">
           <span class="username"><?= htmlspecialchars($book->getSellBy()) ?></span>
         </a>

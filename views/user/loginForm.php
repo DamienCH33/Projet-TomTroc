@@ -8,7 +8,7 @@
     ?>
 <?php endif; ?>
 
-<div class="container-fluid vh-100">
+<div class="container-fluid vh-100 bg-faf9f7">
     <div class="row h-100">
         <section class="col-md-6 d-flex flex-column justify-content-center align-items-center bg-light">
             <div class="w-50">
@@ -28,7 +28,7 @@
                 </form>
 
                 <p class="text-left">
-                    Pas de compte ? <a href="/index.php?page=userForm">S’inscrire</a>
+                    Pas de compte ? <a href="/index.php?page=userForm" class="text-reset">Inscrivez-vous</a>
                 </p>
             </div>
         </section>
