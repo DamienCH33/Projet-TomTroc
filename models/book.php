@@ -2,6 +2,7 @@
 class Book
 {
     private int $id;
+    private ?int $id_user;
     private string $title;
     private string $author;
     private string $sellBy;
@@ -12,6 +13,7 @@ class Book
     public function __construct(array $data)
     {
         $this->id = $data['id'];
+        $this->id_user = $data['id_user'];
         $this->title = $data['title'];
         $this->author = $data['author'];
         $this->sellBy = $data['sell_by'];
@@ -24,6 +26,9 @@ class Book
     {
         return $this->id;
     }
+    public function getId_User(): ?int {
+    return $this->id_user;
+}
     public function getTitle(): string
     {
         return $this->title;

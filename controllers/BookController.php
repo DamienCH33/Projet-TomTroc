@@ -45,6 +45,12 @@ class BookController
         $manager = new BookExchangeManager($pdo);
         $book = $manager->getBookById((int)$id);
 
+        if (!$book || $book->getId_User() !== $_SESSION['user']['id']) {
+            $_SESSION['message'] = "Vous n'avez pas le droit de modifier ce livre.";
+            header("Location: /index.php?page=myAccount");
+            exit;
+        }
+
         $view = new View('bookPage/updateBook');
         $view->render(['book' => $book]);
     }
@@ -65,7 +71,13 @@ class BookController
         $pdo = $db->getPDO();
         $manager = new BookExchangeManager($pdo);
         $book = $manager->getBookById((int) $id);
+        $userId = $_SESSION['user']['id'];
 
+        if (!$book || $book->getId_User() !== $_SESSION['user']['id']) {
+            $_SESSION['message'] = "Action non autorisée.";
+            header("Location: /index.php?page=myAccount");
+            exit();
+        }
         if (!$book) {
             $_SESSION['message'] = "Livre introuvable.";
             header("Location: /index.php?page=BookExchange");

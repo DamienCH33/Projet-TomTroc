@@ -92,15 +92,12 @@ class BookExchangeManager
         $stmt->execute();
         return (int) $stmt->fetchColumn();
     }
-    public function deleteBookByUser(int $id): bool {
-    $userId = $_SESSION['user']['id']; // ou getId() selon ton système
-
-    $sql = "DELETE FROM books WHERE id = :id AND id_user = :user_id";
+    public function deleteBookByUser(int $bookId, int $userId): bool {
+    $sql = "DELETE FROM books WHERE id = :bookId AND id_user = :userId";
     $stmt = $this->db->prepare($sql);
-
     return $stmt->execute([
-        'id' => $id,
-        'user_id' => $userId
+        'bookId' => $bookId,
+        'userId' => $userId
     ]);
 }
 }

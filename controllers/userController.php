@@ -175,7 +175,7 @@ class UserController
             exit();
         }
 
-        $id = $_SESSION['userId'];
+        $id = $_SESSION['user']['id'];
         $hashPassword = !empty($password) ? password_hash($password, PASSWORD_DEFAULT) : null;
 
         $success =  $this->userManager->updateUser($id, $pseudo, $email, $hashPassword);
@@ -192,22 +192,37 @@ class UserController
     public function deleteBookUserProfile()
     {
         $this->checkIfUserIsConnected();
-        $db = new Database();
-        $pdo = $db->getPDO();
-        if (isset($_POST['id']) && is_numeric($_POST['id'])) {
-            $id = (int)$_POST['id'];
-            $bookManager = new BookExchangeManager($pdo);
 
-            if ($bookManager->deleteBookByUser($id)) {
-                $_SESSION['message'] = "Livre supprimé avec succès.";
-            } else {
-                $_SESSION['message'] = "Erreur lors de la suppression du livre.";
-            }
-
-            header('Location: /index.php?page=myAccount');
+        if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
+            $_SESSION['message'] = "ID de livre invalide.";
+            header("Location: /index.php?page=myAccount");
             exit;
         }
+
+        $bookId = (int)$_POST['id'];
+        $userId = (int)$_SESSION['user']['id'];
+
+        $db = new Database();
+        $pdo = $db->getPDO();
+        $manager = new BookExchangeManager($pdo);
+        $book = $manager->getBookById($bookId);
+
+        if (!$book || $book->getId_User() !== $userId) {
+            $_SESSION['message'] = "Vous n'avez pas le droit de supprimer ce livre.";
+            header("Location: /index.php?page=myAccount");
+            exit;
+        }
+
+        if ($manager->deleteBookByUser($bookId, $userId)) {
+            $_SESSION['message'] = "Livre supprimé avec succès.";
+        } else {
+            $_SESSION['message'] = "Erreur lors de la suppression du livre.";
+        }
+
+        header("Location: /index.php?page=myAccount");
+        exit;
     }
+
     /*public function updatePictureProfile(){
         $this->checkIfUserIsConnected();
         $id = $_SESSION['userId'];
