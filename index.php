@@ -10,10 +10,21 @@ $controller = new HomeController();
 $userManager = new UserManager($pdo);
 $userController = new UserController($userManager);
 $bookController = new BookController();
+$chatController = new ChatController();
 
 $page = $_GET['page'] ?? 'home';
 
 switch ($page) {
+    case 'sendMessage':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $chatController->sendMessage();
+        } else {
+            header('Location: index.php?page=chat');
+        }
+        break;
+    case 'chat':
+        $chatController->showChat();
+        break;
     case 'DetailBook':
         $bookController->showDetailBook();
         break;

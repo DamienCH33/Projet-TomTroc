@@ -13,7 +13,9 @@
                     <img src="images/logoLivre.png" alt="Livre" class="me-2 livre-icon">
                     <?= $nbBooks ?> livre(s)
                 </p>
-                <a href="/index.php?page=BookExchange" class="btn btn-primary btn-lg custom-button mt-3">Écrire un message</a>
+                <a href="/index.php?page=chat&with=<?= $user->getId() ?>" class="btn btn-primary btn-lg custom-button mt-3">
+                    Écrire un message
+                </a>
             </div>
         </div>
         <!-- BLOC TABLEAU -->

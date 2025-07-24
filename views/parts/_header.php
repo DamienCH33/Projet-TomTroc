@@ -37,7 +37,7 @@
 
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0 align-items-center">
                         <li class="nav-item mx-2">
-                            <a class="nav-link d-flex align-items-center" href="#">
+                            <a class="nav-link d-flex align-items-center" href="/index.php?page=chat">
                                 <img src="images/Icon_messagerie.png" alt="Messagerie" class="icon-nav">
                                 Messagerie
                             </a>
@@ -62,8 +62,6 @@
                             </li>
                         <?php endif; ?>
                     </ul>
-
-
                 </div>
             </div>
         </nav>

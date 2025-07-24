@@ -16,7 +16,7 @@
           <img src="images/Mask group.png" alt="avatar" class="avatar">
           <span class="username"><?= htmlspecialchars($book->getSellBy()) ?></span>
         </a>
-        <a href="/index.php?page=BookExchange" class="btn btn-success btn-lg mt-5">Envoyer un message</a>
+        <a href="/index.php?page=chat&with=<?= urlencode($book->getSellBy()) ?>" class="btn btn-success btn-lg mt-5">Envoyer un message</a>
       </div>
     </div>
   </div>

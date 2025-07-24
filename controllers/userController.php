@@ -158,7 +158,7 @@ class UserController
             'email' => $user->getEmail(),
             'pseudo' => $user->getPseudo(),
         ];
-
+ 
         header("Location: /index.php?page=myAccount");
         exit();
     }
