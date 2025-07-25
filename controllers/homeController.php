@@ -1,14 +1,14 @@
 <?php
-
 class HomeController
 {
+    private BookExchangeManager $bookManager;
+    public function __construct(BookExchangeManager $bookManager)
+    {
+        $this->bookManager = $bookManager;
+    }
     public function showHome(): void
     {
-        $db = new Database();
-        $pdo = $db->getPDO();
-
-        $manager = new BookExchangeManager($pdo);
-        $books = $manager->getAllBooks();
+        $books = $this->bookManager->getAllBooks();
 
         $view = new View('home');
         $view->render(['books' => $books]);

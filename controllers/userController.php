@@ -3,10 +3,12 @@
 class UserController
 {
     private UserManager $userManager;
+    private BookExchangeManager $bookManager;
 
-    public function __construct(UserManager $userManager)
+    public function __construct()
     {
-        $this->userManager = $userManager;
+        $this->userManager = new UserManager();
+        $this->bookManager = new BookExchangeManager();
     }
     protected function checkIfUserIsConnected(): void
     {
@@ -16,7 +18,6 @@ class UserController
             exit();
         }
     }
-
     public function showInscriptionForm(): void
     {
         $view = new View("user/userForm");
@@ -33,16 +34,9 @@ class UserController
 
         $email = $_SESSION['user']['email'];
 
-        $db = new Database();
-        $pdo = $db->getPDO();
-
-        $manager = new UserManager($pdo);
-        $user = $manager->getUserByEmail($email);
-
-        $bookManager = new BookExchangeManager($pdo);
-        $books = $bookManager->getBooksByUser($user);
-
-        $nbBooks = $bookManager->countBookByUser($user->getId());
+        $user = $this->userManager->getUserByEmail($email);
+        $books = $this->bookManager->getBooksByUser($user);
+        $nbBooks = $this->bookManager->countBookByUser($user->getId());
 
         $view = new View("user/myAccount");
         $view->render([
@@ -54,9 +48,6 @@ class UserController
 
     public function showUserProfile()
     {
-        $db = new Database();
-        $pdo = $db->getPDO();
-
         $pseudo = $_GET['pseudo'] ?? null;
 
         if (!$pseudo) {
@@ -64,26 +55,23 @@ class UserController
             header("Location: /index.php?page=BookExchange");
             exit;
         }
-
-        $manager = new UserManager($pdo);
-        $userData = $manager->getUserByPseudo($pseudo);
-        $user = new User($userData);
-
-        $bookManager = new BookExchangeManager($pdo);
-        $books = $bookManager->getBooksByUser($user);
-        $nbBooks = $bookManager->countBookByUser($user->getId());
-
-        if (!$user) {
+        $userData = $this->userManager->getUserByPseudo($pseudo);
+        if (!$userData) {
             $view = new View("error/notFound");
             $view->render(["message" => "Utilisateur introuvable"]);
             return;
         }
 
+        $user = new User($userData);
+        $books = $this->bookManager->getBooksByUser($user);
+        $nbBooks = $this->bookManager->countBookByUser($user->getId());
+
         $view = new View("user/publicAccount");
-        $view->render(['user' => $user,
-        'books' => $books,
-        'nbBooks' => $nbBooks,
-    ]);
+        $view->render([
+            'user' => $user,
+            'books' => $books,
+            'nbBooks' => $nbBooks,
+        ]);
     }
 
     public function signUpUser()
@@ -100,6 +88,11 @@ class UserController
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['message'] = "Le format de l'email n'est pas valide.";
+            header("Location: /index.php?page=userForm");
+            exit();
+        }
+        if ($this->userManager->emailExists($email)) {
+            $_SESSION['message'] = "Cette adresse e-mail est déjà utilisée.";
             header("Location: /index.php?page=userForm");
             exit();
         }
@@ -158,7 +151,7 @@ class UserController
             'email' => $user->getEmail(),
             'pseudo' => $user->getPseudo(),
         ];
- 
+
         header("Location: /index.php?page=myAccount");
         exit();
     }
@@ -217,10 +210,8 @@ class UserController
         $bookId = (int)$_POST['id'];
         $userId = (int)$_SESSION['user']['id'];
 
-        $db = new Database();
-        $pdo = $db->getPDO();
-        $manager = new BookExchangeManager($pdo);
-        $book = $manager->getBookById($bookId);
+
+        $book = $this->bookManager->getBookById($bookId);
 
         if (!$book || $book->getId_User() !== $userId) {
             $_SESSION['message'] = "Vous n'avez pas le droit de supprimer ce livre.";
@@ -228,7 +219,7 @@ class UserController
             exit;
         }
 
-        if ($manager->deleteBookByUser($bookId, $userId)) {
+        if ($this->bookManager->deleteBookByUser($bookId, $userId)) {
             $_SESSION['message'] = "Livre supprimé avec succès.";
         } else {
             $_SESSION['message'] = "Erreur lors de la suppression du livre.";

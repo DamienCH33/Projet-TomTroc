@@ -1,13 +1,6 @@
 <?php
-class ChatManager
+class ChatManager extends AbstractManager
 {
-    private PDO $db;
-
-    public function __construct(PDO $db)
-    {
-        $this->db = $db;
-    }
-
     public function getConversationsByUser(int $userId): array
     {
         $sql = "

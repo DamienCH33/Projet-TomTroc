@@ -1,32 +1,39 @@
 <?php
 class ChatController
 {
+    private UserManager $userManager;
+    private BookExchangeManager $bookManager;
+    private ChatManager $chatManager;
+
+    public function __construct(ChatManager $chatManager, UserManager $userManager, BookExchangeManager $bookManager)
+    {
+        $this->chatManager = $chatManager;
+        $this->userManager = $userManager;
+        $this->bookManager = $bookManager;
+    }
+
     public function showChat(): void
     {
-        $db = new Database();
-        $pdo = $db->getPDO();
-
         $currentUserId = $_SESSION['user']['id'] ?? null;
         if (!$currentUserId) {
             echo "Erreur : utilisateur non connecté.";
             return;
         }
 
-        $chatManager = new ChatManager($pdo);
         $otherUserId = $_GET['with'] ?? null;
 
-        $conversations = $chatManager->getConversationsByUser($currentUserId);
+        $conversations = $this->chatManager->getConversationsByUser($currentUserId);
 
         if ($otherUserId) {
-            $conversationId = $chatManager->getOrCreateConversation($currentUserId, (int)$otherUserId);
-            $messages = $chatManager->getMessagesByConversation($conversationId);
+            $conversationId = $this->chatManager->getOrCreateConversation($currentUserId, (int)$otherUserId);
+            $messages = $this->chatManager->getMessagesByConversation($conversationId);
         } else {
             $messages = [];
             $conversationId = null;
             if (!empty($conversations)) {
                 $otherUserId = $conversations[0]['other_user_id'];
-                $conversationId = $chatManager->getOrCreateConversation($currentUserId, (int)$otherUserId);
-                $messages = $chatManager->getMessagesByConversation($conversationId);
+                $conversationId = $this->chatManager->getOrCreateConversation($currentUserId, (int)$otherUserId);
+                $messages = $this->chatManager->getMessagesByConversation($conversationId);
             }
         }
 
@@ -41,9 +48,6 @@ class ChatController
 
     public function sendMessage(): void
     {
-        $db = new Database();
-        $pdo = $db->getPDO();
-
         $currentUserId = $_SESSION['user']['id'] ?? null;
         $conversationId = $_POST['conversation_id'] ?? null;
         $receiverId = $_POST['receiver_id'] ?? null;
@@ -55,8 +59,7 @@ class ChatController
             exit();
         }
 
-        $chatManager = new ChatManager($pdo);
-        $chatManager->sendMessage((int)$conversationId, $currentUserId, $message);
+        $this->chatManager->sendMessage((int)$conversationId, $currentUserId, $message);
 
         header("Location: index.php?page=chat&with=$receiverId");
         exit();

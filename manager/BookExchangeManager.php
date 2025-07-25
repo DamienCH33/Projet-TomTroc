@@ -1,14 +1,7 @@
 <?php
 
-class BookExchangeManager
+class BookExchangeManager extends AbstractManager
 {
-    private PDO $db;
-
-    public function __construct(PDO $db)
-    {
-        $this->db = $db;
-    }
-
     public function getBookById(int $id): ?Book
     {
         $sql = 'SELECT * FROM books WHERE id = ?';

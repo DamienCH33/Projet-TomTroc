@@ -1,5 +1,5 @@
 <div>
-    <div class="container-fluid homeOne">
+    <div class="container-fluid homeOne py-5">
         <section>
             <div class="row justify-content-center align-items-center ">
                 <div class="col-3">

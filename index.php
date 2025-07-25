@@ -6,11 +6,14 @@ require_once __DIR__ . '/config/autoload.php';
 $db = new Database();
 $pdo = $db->getPDO();
 
-$controller = new HomeController();
-$userManager = new UserManager($pdo);
-$userController = new UserController($userManager);
-$bookController = new BookController();
-$chatController = new ChatController();
+$userManager = new UserManager();
+$bookManager = new BookExchangeManager();
+$chatManager = new ChatManager();
+
+$controller = new HomeController($bookManager);
+$userController = new UserController();
+$bookController = new BookController($bookManager);
+$chatController = new ChatController($chatManager, $userManager, $bookManager);
 
 $page = $_GET['page'] ?? 'home';
 

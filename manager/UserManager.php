@@ -1,24 +1,31 @@
 <?php
 
-class UserManager
+class UserManager extends AbstractManager
 {
-    private PDO $db;
-
-    public function __construct(PDO $db)
-    {
-        $this->db = $db;
-    }
-
     //insertion en db new user
-    public function saveUser(string $pseudo, string $email, string $password)
-    {
+   public function saveUser(string $pseudo, string $email, string $password): bool|string
+{
+    try {
         $sql = "INSERT INTO user (pseudo, email, password) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($sql);
-        $result = $stmt->execute([$pseudo, $email, $password]);
-
-        return $result;
+        $stmt->execute([$pseudo, $email, $password]);
+        return true;
+    } catch (PDOException $e) {
+        // Erreur de type "Duplicate entry"
+        if ($e->errorInfo[1] === 1062) {
+            return 'duplicate';
+        }
+        return false;
     }
+}
+  public function emailExists(string $email): bool
+{
+    $sql = "SELECT id FROM user WHERE email = ?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute([$email]);
 
+    return $stmt->rowCount() > 0;
+}
     // recherche du user par email
     public function getUserByEmail(string $email)
     {
