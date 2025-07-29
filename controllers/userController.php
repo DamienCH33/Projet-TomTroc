@@ -229,19 +229,46 @@ class UserController
         exit;
     }
 
-    /*public function updatePictureProfile(){
+    public function updatePictureProfile()
+    {
         $this->checkIfUserIsConnected();
-        $id = $_SESSION['userId'];
-        $picture = $_SESSION['userPicture'];
+        $id = $_SESSION['user']['id'];
 
-        $success = $this->userManager->updatePicture($id, $picture);
-        if ($success) {
-                $_SESSION['userPicture'] = $picture;
-                $_SESSION['message'] = "Votre photo de profil a été mis à jour avec succès.";
-            } else {
-                $_SESSION['message'] = "Une erreur s'est produite lors de la mise à jour de votre compte.";
+        if (!isset($_FILES['picture']) || $_FILES['picture']['error'] !== UPLOAD_ERR_OK) {
+            $_SESSION['message'] = "Aucune image valide n'a été envoyée.";
+            header("Location: /index.php?page=myAccount");
+            exit();
         }
+
+        $uploadDir = 'images/images_profile/';
+        $ext = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
+        $filename = uniqid('profile_') . '.' . $ext;
+        $targetFile = $uploadDir . $filename;
+
+        // Vérification type MIME + taille
+        $allowedMime = ['image/jpeg', 'image/png', 'image/webp'];
+        if (!in_array($_FILES['picture']['type'], $allowedMime)) {
+            $_SESSION['message'] = "Format d'image non autorisé.";
+            header("Location: /index.php?page=myAccount");
+            exit();
+        }
+
+        if ($_FILES['picture']['size'] > 2 * 1024 * 1024) { // 2 Mo max
+            $_SESSION['message'] = "Image trop lourde. 2 Mo max.";
+            header("Location: /index.php?page=myAccount");
+            exit();
+        }
+
+        // Déplacement et update
+        if (move_uploaded_file($_FILES['picture']['tmp_name'], $targetFile)) {
+            $this->userManager->updatePictureProfile($id, $targetFile);
+            $_SESSION['user']['picture'] = $targetFile;
+            $_SESSION['message'] = "Image de profil mise à jour.";
+        } else {
+            $_SESSION['message'] = "Échec du téléchargement de l'image.";
+        }
+
         header("Location: /index.php?page=myAccount");
         exit();
-    }*/
+    }
 }

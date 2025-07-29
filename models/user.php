@@ -7,6 +7,7 @@ class User
     private string $pseudo;
     private string $password;
     private DateTime $createdAt;
+    private ?string $picture;
 
     public function __construct(array $data = [])
     {
@@ -16,6 +17,7 @@ class User
             $this->pseudo = $data['pseudo'];
             $this->password = $data['password'];
             $this->createdAt = new DateTime($data['created_at']);
+            $this->picture = $data['picture'] ?? null;
         }
     }
     public function getId(): int
@@ -68,5 +70,9 @@ class User
         } else {
             return "quelques secondes";
         }
+    }
+     public function getPicture(): ?string
+    {
+        return $this->picture;
     }
 }

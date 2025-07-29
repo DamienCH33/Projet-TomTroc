@@ -12,8 +12,11 @@
         <div class="d-flex justify-content-center gap-5">
             <!-- Section 1 (profil) -->
             <div class="profile-section bg-white p-5 rounded d-flex flex-column align-items-center justify-content-start">
-                <img src="/images/images_profile/nathalire.jpg" alt="Image de profil de l'utilisateur" class="profile-img img-fluid rounded-circle mb-3">
-                <a href="#" class="modifier-link mb-3">modifier</a>
+                <img src="/<?= htmlspecialchars($user->getPicture() ?: 'images/images_profile/default.png') ?>" alt="Image de profil" class="profile-img img-fluid rounded-circle mb-3">
+                <a href="#" class="modifier-link mb-3" onclick="document.getElementById('fileInput').click(); return false;">modifier</a>
+                <form method="POST" action="index.php?page=updatePictureProfile" enctype="multipart/form-data" id="pictureForm">
+                    <input type="file" name="picture" id="fileInput" accept="image/*" style="display: none;" onchange="document.getElementById('pictureForm').submit();">
+                </form>
                 <div class="separator mb-3"></div>
                 <h2 class="text-muted mb-1"><?= htmlspecialchars($user->getPseudo()) ?></h2>
                 <p class="text-muted mb-3">Membre depuis <?= $user->getAccountAge() ?></p>

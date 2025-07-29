@@ -71,7 +71,7 @@ class UserManager extends AbstractManager
         }
     }
    
-    /*public function updatePictureProfile(int $id, string $picture)
+    public function updatePictureProfile(int $id, string $picture)
     {
         $sql = "UPDATE user SET picture = :picture WHERE id = :id";
         $stmt = $this->db->prepare($sql);
@@ -79,5 +79,5 @@ class UserManager extends AbstractManager
             'picture' => $picture,
             'id' => $id
         ]);
-    }*/
+    }
 }
