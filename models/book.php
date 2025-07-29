@@ -26,9 +26,10 @@ class Book
     {
         return $this->id;
     }
-    public function getId_User(): ?int {
-    return $this->id_user;
-}
+    public function getIdUser(): ?int
+    {
+        return $this->id_user;
+    }
     public function getTitle(): string
     {
         return $this->title;

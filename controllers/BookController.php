@@ -3,26 +3,36 @@
 class BookController
 {
     private BookExchangeManager $bookManager;
+    private UserManager $userManager;
     public function __construct()
     {
         $this->bookManager = new BookExchangeManager();
+        $this->userManager = new UserManager();
     }
     public function showDetailBook(): void
     {
-               $id = $_GET['id'] ?? null;
+        $id = $_GET['id'] ?? null;
         if (!$id) {
             throw new Exception("ID de livre manquant.");
         }
 
         $book = $this->bookManager->getBookById((int) $id);
 
+        $user = null;
+        if ($book && $book->getIdUser() !== null) {
+            $user = $this->userManager->getUserById($book->getIdUser());
+        }
+
         $view = new View('bookPage/detailBook');
-        $view->render(['book' => $book]);
+        $view->render([
+            'book' => $book,
+            'user' => $user,
+        ]);
     }
 
     public function showBookExchange(): void
     {
-          $search = $_GET['search'] ?? '';
+        $search = $_GET['search'] ?? '';
         $books = $this->bookManager->getBookBySearch($search);
 
         $view = new View('bookPage/bookExchange');
@@ -37,7 +47,7 @@ class BookController
         }
         $book = $this->bookManager->getBookById((int)$id);
 
-        if (!$book || $book->getId_User() !== $_SESSION['user']['id']) {
+        if (!$book || $book->getIdUser() !== $_SESSION['user']['id']) {
             $_SESSION['message'] = "Vous n'avez pas le droit de modifier ce livre.";
             header("Location: /index.php?page=myAccount");
             exit;
@@ -62,7 +72,7 @@ class BookController
         $book = $this->bookManager->getBookById((int) $id);
         $userId = $_SESSION['user']['id'];
 
-        if (!$book || $book->getId_User() !== $_SESSION['user']['id']) {
+        if (!$book || $book->getIdUser() !== $_SESSION['user']['id']) {
             $_SESSION['message'] = "Action non autorisée.";
             header("Location: /index.php?page=myAccount");
             exit();

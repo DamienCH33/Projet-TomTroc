@@ -3,29 +3,29 @@
 class UserManager extends AbstractManager
 {
     //insertion en db new user
-   public function saveUser(string $pseudo, string $email, string $password): bool|string
-{
-    try {
-        $sql = "INSERT INTO user (pseudo, email, password) VALUES (?, ?, ?)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$pseudo, $email, $password]);
-        return true;
-    } catch (PDOException $e) {
-        // Erreur de type "Duplicate entry"
-        if ($e->errorInfo[1] === 1062) {
-            return 'duplicate';
+    public function saveUser(string $pseudo, string $email, string $password): bool|string
+    {
+        try {
+            $sql = "INSERT INTO user (pseudo, email, password) VALUES (?, ?, ?)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$pseudo, $email, $password]);
+            return true;
+        } catch (PDOException $e) {
+            // Erreur de type "Duplicate entry"
+            if ($e->errorInfo[1] === 1062) {
+                return 'duplicate';
+            }
+            return false;
         }
-        return false;
     }
-}
-  public function emailExists(string $email): bool
-{
-    $sql = "SELECT id FROM user WHERE email = ?";
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute([$email]);
+    public function emailExists(string $email): bool
+    {
+        $sql = "SELECT id FROM user WHERE email = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$email]);
 
-    return $stmt->rowCount() > 0;
-}
+        return $stmt->rowCount() > 0;
+    }
     // recherche du user par email
     public function getUserByEmail(string $email)
     {
@@ -47,6 +47,20 @@ class UserManager extends AbstractManager
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':pseudo' => $pseudo]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    // recherche du user par id
+    public function getUserById(int $id)
+    {
+        $sql = "SELECT * FROM user WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($userData) {
+            return new User($userData);
+        }
+
+        return null;
     }
 
     public function updateUser(int $id, string $pseudo, string $email, ?string $password)
@@ -70,7 +84,7 @@ class UserManager extends AbstractManager
             ]);
         }
     }
-   
+
     public function updatePictureProfile(int $id, string $picture)
     {
         $sql = "UPDATE user SET picture = :picture WHERE id = :id";
