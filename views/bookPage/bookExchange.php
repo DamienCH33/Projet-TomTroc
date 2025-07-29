@@ -18,21 +18,21 @@
             <div class="row gy-5 py-5">
                 <?php foreach ($books as $book): ?>
                     <div class="col-3">
-                        <div class="card shadow-sm border-0">
-                            <a href="index.php?page=DetailBook&id=<?= $book->getId() ?>" class="position-relative d-block">
+                        <a href="index.php?page=DetailBook&id=<?= $book->getId() ?>" class="text-decoration-none text-reset d-block h-100">
+                            <div class="card shadow-sm border-0 h-100 position-relative">
                                 <img class="card-img-top" src="<?= htmlspecialchars($book->getImages()) ?>" alt="<?= htmlspecialchars($book->getTitle()) ?>" style="height: 200px; object-fit: cover;">
                                 <?php if (!$book->isAvailable()): ?>
                                     <span class="availability-badge unavailable position-absolute top-0 end-0 m-2">
                                         Non disponible
                                     </span>
                                 <?php endif; ?>
-                            </a>
-                            <div class="card-body text-start">
-                                <h5 class="card-title"><?= htmlspecialchars($book->getTitle()) ?></h5>
-                                <p class="card-text"><?= htmlspecialchars($book->getAuthor()) ?></p>
-                                <p class="card-sell">Vendu par : <?= htmlspecialchars($book->getSellBy()) ?></p>
+                                <div class="card-body text-start">
+                                    <h5 class="card-title"><?= htmlspecialchars($book->getTitle()) ?></h5>
+                                    <p class="card-text"><?= htmlspecialchars($book->getAuthor()) ?></p>
+                                    <p class="card-sell">Vendu par : <?= htmlspecialchars($book->getSellBy()) ?></p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 <?php endforeach; ?>
             </div>
