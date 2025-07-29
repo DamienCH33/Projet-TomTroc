@@ -3,6 +3,13 @@ session_start();
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/config/autoload.php';
 
+if (isset($_SESSION['user']['id'])) {
+    $chatManager = new ChatManager();
+    $GLOBALS['newMessagesCount'] = $chatManager->countUnreadMessagesByUserId($_SESSION['user']['id']);
+} else {
+    $GLOBALS['newMessagesCount'] = 0;
+}
+
 $db = new Database();
 $pdo = $db->getPDO();
 
@@ -10,9 +17,9 @@ $userManager = new UserManager();
 $bookManager = new BookExchangeManager();
 $chatManager = new ChatManager();
 
-$controller = new HomeController($bookManager);
+$controller = new HomeController($bookManager, $chatManager);
 $userController = new UserController();
-$bookController = new BookController($bookManager);
+$bookController = new BookController();
 $chatController = new ChatController($chatManager, $userManager, $bookManager);
 
 $page = $_GET['page'] ?? 'home';

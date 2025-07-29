@@ -1,13 +1,12 @@
-<div class="container-fluid py-4">
-    <div class="row">
-        <!-- Liste des conversations à gauche -->
-        <div class="col-md-4" style="background-color: #FAF9F7; height: 90vh; overflow-y: auto;">
+<div class="container-fluid py-4 background-color:#F5F3EF;">
+    <div class="row background-color:#F5F3EF;">
+        <div class="col-md-3" style="height: 90vh; overflow-y: auto; background-color:#F5F3EF;">
             <h4 class="px-3 pt-3">Messagerie</h4>
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush py-4">
                 <?php foreach ($conversations as $conv): ?>
                     <a href="index.php?page=chat&with=<?= htmlspecialchars($conv['other_user_id']) ?>"
                         class="list-group-item list-group-item-action d-flex align-items-start gap-3">
-                        <img src="<?= htmlspecialchars($conv['picture'] ?? '/images/Mask group.png') ?>" alt="Avatar" class="rounded-circle" width="50" height="50">
+                        <img src="<?= htmlspecialchars($conv['picture']) ?>" alt="Avatar" class="rounded-circle" width="50" height="50">
                         <div class="flex-grow-1">
                             <div class="d-flex justify-content-between">
                                 <strong class="text-dark"><?= htmlspecialchars($conv['pseudo']) ?></strong>
@@ -23,9 +22,8 @@
                 <?php endforeach; ?>
             </ul>
         </div>
-
         <!-- Conversation et envoi message à droite -->
-        <div class="col-md-8 d-flex flex-column justify-content-between" style="height: 90vh;">
+        <div class="col-md-9 d-flex flex-column justify-content-between" style="height: 90vh; background-color:#F5F3EF;">
             <div class="d-flex align-items-center p-3 border-bottom">
                 <?php if (!empty($conversations)): ?>
                     <img src="<?= htmlspecialchars($conversations[0]['picture'] ?? '/images/default.png') ?>" alt="Avatar" class="rounded-circle me-3" width="50" height="50">
@@ -35,7 +33,7 @@
                 <?php endif; ?>
             </div>
 
-            <div class="flex-grow-1 overflow-auto p-3" style="background-color: #fff;">
+            <div class="flex-grow-1 overflow-auto p-3" style="background-color: #FFFFFF;">
                 <?php foreach ($messages as $msg): ?>
                     <?php if ($msg['sender_id'] == $_SESSION['user']['id']): ?>
                         <div class="mb-3 text-end">
@@ -43,7 +41,7 @@
                             <small class="text-muted"><?= date('H:i', strtotime($msg['sent_at'])) ?></small>
                         </div>
                     <?php else: ?>
-                        <div class="mb-3">
+                        <div class="mb-3 style="background-color: #EDF2F6;">
                             <div class="bg-light p-2 rounded w-75"><?= htmlspecialchars($msg['message']) ?></div>
                             <small class="text-muted"><?= date('H:i', strtotime($msg['sent_at'])) ?></small>
                         </div>

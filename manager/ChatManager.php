@@ -53,10 +53,19 @@ class ChatManager extends AbstractManager
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function sendMessage(int $conversationId, int $senderId, string $message): bool
+    public function sendMessage(int $conversationId, int $senderId, int $receiverId, string $message): bool
     {
-        $sql = "INSERT INTO messages (conversation_id, sender_id, message, sent_at) VALUES (?, ?, ?, NOW())";
+        $sql = "INSERT INTO messages (conversation_id, sender_id, receiver_id, message, is_read) VALUES (?, ?, ?, ?, 0)";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute([$conversationId, $senderId, $message]);
+        return $stmt->execute([$conversationId, $senderId, $receiverId, $message]);
+    }
+      public function countUnreadMessagesByUserId(int $userId): int
+    {
+        $sql = $this->db->prepare("
+            SELECT COUNT(*) FROM messages
+            WHERE receiver_id = ? AND is_read = 0
+        ");
+        $sql->execute([$userId]);
+        return (int) $sql->fetchColumn();
     }
 }

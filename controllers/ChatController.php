@@ -47,21 +47,27 @@ class ChatController
     }
 
     public function sendMessage(): void
-    {
-        $currentUserId = $_SESSION['user']['id'] ?? null;
-        $conversationId = $_POST['conversation_id'] ?? null;
-        $receiverId = $_POST['receiver_id'] ?? null;
-        $message = trim($_POST['message'] ?? '');
+{
+    $currentUserId = $_SESSION['user']['id'] ?? null;
+    $conversationId = $_POST['conversation_id'] ?? null;
+    $receiverId = $_POST['receiver_id'] ?? null;
+    $message = trim($_POST['message'] ?? '');
 
-        if (!$currentUserId || !$conversationId || !$receiverId || empty($message)) {
-            $_SESSION['message'] = "Erreur lors de l'envoi du message.";
-            header("Location: index.php?page=chat");
-            exit();
-        }
-
-        $this->chatManager->sendMessage((int)$conversationId, $currentUserId, $message);
-
-        header("Location: index.php?page=chat&with=$receiverId");
+    if (!$currentUserId || !$conversationId || !$receiverId || empty($message)) {
+        $_SESSION['message'] = "Erreur lors de l'envoi du message.";
+        header("Location: index.php?page=chat");
         exit();
     }
+
+    $this->chatManager->sendMessage(
+        (int)$conversationId,
+        (int)$currentUserId,
+        (int)$receiverId,
+        $message
+    );
+
+    header("Location: index.php?page=chat&with=$receiverId");
+    exit();
+}
+
 }

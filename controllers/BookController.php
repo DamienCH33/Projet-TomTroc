@@ -3,9 +3,9 @@
 class BookController
 {
     private BookExchangeManager $bookManager;
-    public function __construct(BookExchangeManager $bookManager)
+    public function __construct()
     {
-        $this->bookManager = $bookManager;
+        $this->bookManager = new BookExchangeManager();
     }
     public function showDetailBook(): void
     {

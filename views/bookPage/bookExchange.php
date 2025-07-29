@@ -1,6 +1,6 @@
 <section class="homeTwo py-5">
-    <div class="container mt-5">
-        <div class="row align-items-center justify-content-start mb-4">
+    <div class="container ">
+        <div class="row justify-content-start mb-4">
             <div class="col-md-4">
                 <h1 class="mb-0 text-start">Nos livres à l’échange</h1>
             </div>
@@ -15,9 +15,9 @@
         <?php if (empty($books)): ?>
             <p>Aucun livre trouvé pour votre recherche.</p>
         <?php else: ?>
-            <div class="row justify-content-center gy-5 py-5">
+            <div class="row gy-5 py-5">
                 <?php foreach ($books as $book): ?>
-                    <div class="col-md-3">
+                    <div class="col-3">
                         <div class="card shadow-sm border-0">
                             <a href="index.php?page=DetailBook&id=<?= $book->getId() ?>" class="position-relative d-block">
                                 <img class="card-img-top" src="<?= htmlspecialchars($book->getImages()) ?>" alt="<?= htmlspecialchars($book->getTitle()) ?>" style="height: 200px; object-fit: cover;">
