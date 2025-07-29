@@ -1,6 +1,6 @@
 <?php
 
-class BookController
+class BookController extends AbstractController
 {
     private BookExchangeManager $bookManager;
     private UserManager $userManager;
@@ -89,8 +89,55 @@ class BookController
 
         $this->bookManager->updateBook($book);
 
-        $_SESSION['message'] = "Livre mis à jour avec succès.";
-        header("Location: /index.php?page=DetailBook&id=" . $book->getId());
+        $_SESSION['message'] = "Livre mise à jour avec succès.";
+        header("Location: /index.php?page=myAccount");
+        exit();
+    }
+    public function updatePictureBook()
+    {
+        $this->checkIfUserIsConnected();
+
+        $bookId = $_POST['id'] ?? $_GET['id'] ?? null;
+
+        if (!$bookId) {
+            $_SESSION['message'] = "ID du livre manquant.";
+            header("Location: index.php?page=updateBook&id=" . $bookId);
+            exit();
+        }
+var_dump($_FILES);
+die;
+        if (!isset($_FILES['images']) || $_FILES['images']['error'] !== UPLOAD_ERR_OK) {
+            $_SESSION['message'] = "Aucune image valide n'a été envoyée.";
+            header("Location: index.php?page=updateBook&id=" . $bookId);
+            exit();
+        }
+
+        $uploadDir = 'images/images_books/';
+        $ext = pathinfo($_FILES['images']['name'], PATHINFO_EXTENSION);
+        $filename = uniqid('book_') . '.' . $ext;
+        $targetFile = $uploadDir . $filename;
+
+        $allowedMime = ['image/jpeg', 'image/png', 'image/webp'];
+        if (!in_array($_FILES['images']['type'], $allowedMime)) {
+            $_SESSION['message'] = "Format d'image non autorisé.";
+            header("Location: index.php?page=updateBook&id=" . $bookId);
+            exit();
+        }
+
+        if ($_FILES['images']['size'] > 2 * 1024 * 1024) {
+            $_SESSION['message'] = "Image trop lourde. 2 Mo max.";
+            header("Location: index.php?page=updateBook&id=" . $bookId);
+            exit();
+        }
+
+        if (move_uploaded_file($_FILES['images']['tmp_name'], $targetFile)) {
+            $this->bookManager->updatePictureBook((int)$bookId, $targetFile);
+            $_SESSION['message'] = "Image du livre mise à jour.";
+        } else {
+            $_SESSION['message'] = "Échec du téléchargement de l'image.";
+        }
+
+        header("Location: index.php?page=updateBook&id=" . $bookId);
         exit();
     }
 }

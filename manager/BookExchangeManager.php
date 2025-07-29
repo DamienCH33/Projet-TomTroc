@@ -85,12 +85,22 @@ class BookExchangeManager extends AbstractManager
         $stmt->execute();
         return (int) $stmt->fetchColumn();
     }
-    public function deleteBookByUser(int $bookId, int $userId): bool {
-    $sql = "DELETE FROM books WHERE id = :bookId AND id_user = :userId";
-    $stmt = $this->db->prepare($sql);
-    return $stmt->execute([
-        'bookId' => $bookId,
-        'userId' => $userId
-    ]);
-}
+    public function deleteBookByUser(int $bookId, int $userId): bool
+    {
+        $sql = "DELETE FROM books WHERE id = :bookId AND id_user = :userId";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            'bookId' => $bookId,
+            'userId' => $userId
+        ]);
+    }
+    public function updatePictureBook(int $id, string $images)
+    {
+        $sql = "UPDATE books SET images = :images WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            'images' => $images,
+            'id' => $id
+        ]);
+    }
 }

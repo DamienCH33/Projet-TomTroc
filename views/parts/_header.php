@@ -70,3 +70,9 @@
             </div>
         </nav>
     </header>
+    <?php if (!empty($_SESSION['message'])) : ?>
+        <div class="alert alert-info">
+            <?= htmlspecialchars($_SESSION['message']) ?>
+        </div>
+        <?php unset($_SESSION['message']); ?>
+    <?php endif; ?>

@@ -1,9 +1,3 @@
-<?php if (!empty($_SESSION['message'])) : ?>
-    <div class="alert alert-info">
-        <?= htmlspecialchars($_SESSION['message']) ?>
-    </div>
-    <?php unset($_SESSION['message']); ?>
-<?php endif; ?>
 <div class="container-fluid homeOne py-5">
     <div class="d-flex flex-column align-items-left">
         <div class="section-title">
@@ -14,7 +8,7 @@
             <div class="profile-section bg-white p-5 rounded d-flex flex-column align-items-center justify-content-start">
                 <img src="/<?= htmlspecialchars($user->getPicture() ?: 'images/images_profile/default.png') ?>" alt="Image de profil" class="profile-img img-fluid rounded-circle mb-3">
                 <a href="#" class="modifier-link mb-3" onclick="document.getElementById('fileInput').click(); return false;">modifier</a>
-                <form method="POST" action="index.php?page=updatePictureProfile" enctype="multipart/form-data" id="pictureForm">
+                <form method="POST" action="index.php?page=updateProfilePicture" enctype="multipart/form-data" id="pictureForm">
                     <input type="file" name="picture" id="fileInput" accept="image/*" style="display: none;" onchange="document.getElementById('pictureForm').submit();">
                 </form>
                 <div class="separator mb-3"></div>

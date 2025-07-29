@@ -7,10 +7,14 @@
         <div class="col-6">
             <p class="fw-semibold mb-2">Photo</p>
             <img src="<?= htmlspecialchars($book->getImages()) ?>" alt="Image du livre" class="img-fluid rounded shadow-sm mb-2">
-            <div>
-                <a href="#" class="text-decoration-underline small text-end">Modifier la photo</a>
-            </div>
+
+            <form action="index.php?page=updatePictureBook&id=<?= $book->getId() ?>" method="post" enctype="multipart/form-data">
+                <input type="file" name="images" id="fileInput" accept="image/*">
+                <input type="hidden" name="id" value="<?= $book->getId() ?>">
+                <button type="submit" name="submit">Modifier l'image</button>
+            </form>
         </div>
+
         <div class="col-6 ">
             <form method="POST" action="index.php?page=updateBookSubmit">
                 <input type="hidden" name="id" value="<?= $book->getId() ?>">

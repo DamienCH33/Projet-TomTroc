@@ -1,6 +1,6 @@
 <?php
 
-class UserController
+class UserController extends AbstractController
 {
     private UserManager $userManager;
     private BookExchangeManager $bookManager;
@@ -9,14 +9,6 @@ class UserController
     {
         $this->userManager = new UserManager();
         $this->bookManager = new BookExchangeManager();
-    }
-    protected function checkIfUserIsConnected(): void
-    {
-        if (empty($_SESSION['user']) || empty($_SESSION['user']['email'])) {
-            $_SESSION['message'] = "Accès refusé. Veuillez vous connecter.";
-            header("Location: index.php?page=loginForm");
-            exit();
-        }
     }
     public function showInscriptionForm(): void
     {
@@ -213,7 +205,7 @@ class UserController
 
         $book = $this->bookManager->getBookById($bookId);
 
-        if (!$book || $book->getId_User() !== $userId) {
+        if (!$book || $book->getIdUser() !== $userId) {
             $_SESSION['message'] = "Vous n'avez pas le droit de supprimer ce livre.";
             header("Location: /index.php?page=myAccount");
             exit;

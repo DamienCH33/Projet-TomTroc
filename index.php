@@ -81,9 +81,11 @@ switch ($page) {
             exit();
         }
         break;
-    case 'updatePictureProfile':
-        $controller = new UserController();
-        $controller->updatePictureProfile();
+    case 'updateProfilePicture':
+        (new UserController())->updatePictureProfile();
+        break;
+    case 'updatePictureBook':
+        (new BookController())->updatePictureBook();
         break;
     case 'home':
     default:
