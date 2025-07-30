@@ -428,6 +428,33 @@ background: #EDF2F6;
   object-fit: cover;
 }
 
+/*messagerie*/
+.active-conversation {
+    background-color: #FFFFFF !important;
+}
+
+.inactive-conversation {
+    background-color: #FAF9F7 !important;
+}
+
+.custom-col-chat{
+  background-color: #F5F3EF;
+}
+
+.custom-chat{
+  background-color:#F5F3EF;
+}
+.custom-input {
+    background-color: #F0F0F0 !important;
+}
+.hide-scrollbar {
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
 
 /*footer*/
 footer.footer {
