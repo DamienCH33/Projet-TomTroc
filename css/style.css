@@ -427,7 +427,66 @@ background: #EDF2F6;
   height: 78px;
   object-fit: cover;
 }
+/*update book*/
+.bloc-photo-custom {
+    width: 488px;
+    height: 553px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.custom-title-book{
+  font-size: 26px;
+}
+.input-title {
+    width: 435px;
+    height: 50px;
+}
 
+.input-author {
+    width: 435px;
+    height: 50px;
+}
+.input-available {
+  width: 435px;
+  height: 50px;
+  margin-bottom: 40px;
+}
+.textarea-description {
+    width: 435px;
+    height: 383px;
+    resize: none; 
+}
+
+.select-availability {
+    width: 435px;
+    height: 77px;
+}
+
+.btn-validate {
+    width: 322px;
+    height: 63px;
+    font-size: 1.2rem;
+}
+.bg-custom-book {
+    background-color: #FAF9F7;
+}
+.text-custom{
+  color: #A6A6A6 !important;
+  width: 52px !important;
+  height: 17px !important;
+  display: inline-block;
+}
+.custom-link{
+  color:#292929;
+  font-size: 12px;
+  width: 97px;
+  height: 15px;
+}
+.custom-P{
+  color: #A6A6A6;
+  width: 39px;
+  height: 17px;
+}
 /*messagerie*/
 .active-conversation {
     background-color: #FFFFFF !important;
