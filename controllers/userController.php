@@ -243,7 +243,9 @@ class UserController extends AbstractController
         $book->setImages('/images/livres.jpeg');
 
         $userId = $_SESSION['user']['id'];
-        $this->bookManager->addBookByUser($book, $userId);
+        $pseudo = $_SESSION['user']['pseudo'];
+
+        $this->bookManager->addBookByUser($book, $userId, $pseudo);
 
         $_SESSION['message'] = "Livre ajouté avec succès.";
         header("Location: /index.php?page=myAccount");
