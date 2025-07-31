@@ -10,18 +10,17 @@ class Book
     private string $images;
     private string $description;
 
-    public function __construct(array $data)
-    {
-        $this->id = $data['id'];
-        $this->id_user = $data['id_user'];
-        $this->title = $data['title'];
-        $this->author = $data['author'];
-        $this->sellBy = $data['sell_by'];
-        $this->available = $data['available'];
-        $this->images = $data['images'];
-        $this->description = $data['description'];
-    }
-
+    public function __construct(array $data = [])
+{
+    $this->id = $data['id'] ?? 0;
+    $this->id_user = $data['id_user'] ?? null;
+    $this->title = $data['title'] ?? '';
+    $this->author = $data['author'] ?? '';
+    $this->sellBy = $data['sell_by'] ?? '';
+    $this->available = $data['available'] ?? '0';
+    $this->images = $data['images'] ?? '';
+    $this->description = $data['description'] ?? '';
+}
     public function getId(): int
     {
         return $this->id;
@@ -49,6 +48,10 @@ class Book
     public function getImages(): string
     {
         return $this->images;
+    }
+    public function setImages(string $images): void
+    {
+        $this->images = $images;
     }
     public function getDescription(): string
     {

@@ -3,12 +3,12 @@
         <section>
             <div class="row justify-content-center align-items-center ">
                 <div class="col-3">
-                    <h1>Rejoignez nos <br>lecteurs passionnés</h1>
+                    <h1>Rejoignez nos <br>lecteurs passionnés</h1><br>
                     <p class="limited-width">Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture.
                         Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.
                     </p>
                     <p>
-                        <a href="/index.php?page=BookExchange" class="btn btn-primary btn-lg custom-button-reverse">Découvrir</a>
+                        <a href="/index.php?page=BookExchange" class="btn btn-primary btn-lg custom-button-reverse ">Découvrir</a>
                     </p>
                 </div>
                 <div class="col-3 text-end">

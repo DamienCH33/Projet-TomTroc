@@ -12,11 +12,11 @@
                     <input type="file" name="picture" id="fileInput" accept="image/*" style="display: none;" onchange="document.getElementById('pictureForm').submit();">
                 </form>
                 <div class="separator mb-3"></div>
-                <h2 class="text-muted mb-1"><?= htmlspecialchars($user->getPseudo()) ?></h2>
-                <p class="text-muted mb-3">Membre depuis <?= $user->getAccountAge() ?></p>
-                <p class="mb-1">BIBLIOTHÈQUE</p>
+                <h2 class="text-muted mb-1 custom-name"><?= htmlspecialchars($user->getPseudo()) ?></h2>
+                <p class="text-muted mb-3 custom-date">Membre depuis <?= $user->getAccountAge() ?></p>
+                <p class="mb-1 custom-bibli">BIBLIOTHÈQUE</p>
                 <p class="text-muted d-flex align-items-center">
-                    <img src="images/logoLivre.png" alt="Livre" class="me-2 livre-icon">
+                    <img src="images/logoLivre.png" alt="Livre" class="me-2 livre-icon custom-number">
                     <?= $nbBooks ?> livre(s)
                 </p>
             </div>
@@ -63,33 +63,23 @@
                 </tr>
             </thead>
             <tbody>
-
-                <?php
-                /** @var Book $book */
-                foreach ($books as $book): ?>
+                <?php foreach ($books as $book): ?>
                     <tr>
-                        <td>
-                            <img src="<?= htmlspecialchars($book->getImages()) ?>" alt="book" class="rounded livre-image">
-                        </td>
-
+                        <td><img src="<?= htmlspecialchars($book->getImages()) ?>" alt="book" class="rounded livre-image"></td>
                         <td>
                             <div class="livre-titre"><?= htmlspecialchars($book->getTitle()) ?></div>
                         </td>
-
                         <td>
                             <div class="livre-auteur"><?= htmlspecialchars($book->getAuthor()) ?></div>
                         </td>
-
                         <td>
                             <div class="livre-description"><?= htmlspecialchars($book->getDescription()) ?></div>
                         </td>
-
                         <td>
                             <span class="availability-badge <?= $book->getAvailableClass() ?>" style="white-space: nowrap;">
                                 <?= $book->getAvailableLabel() ?>
                             </span>
                         </td>
-
                         <td>
                             <div class="livre-actions">
                                 <a href="/index.php?page=updateBook&id=<?= $book->getId() ?>" class="action-link">Éditer</a>
@@ -103,5 +93,9 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+
+        <div class="text-end mt-3">
+            <a href="/index.php?page=addBook" class="btn btn-primary btn-lg custom-button">Ajouter un livre</a>
+        </div>
     </div>
 </div>

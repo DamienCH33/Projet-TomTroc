@@ -47,6 +47,12 @@ switch ($page) {
     case 'updateBookSubmit':
         $bookController->updateBookProfile();
         break;
+    case 'addBook':
+        $bookController->showAddBook();
+        break;
+    case 'addBookSubmit':
+        $userController->addBookUserProfile();
+        break;
     case 'deleteBook':
         $userController->deleteBookUserProfile();
         break;

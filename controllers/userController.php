@@ -220,7 +220,35 @@ class UserController extends AbstractController
         header("Location: /index.php?page=myAccount");
         exit;
     }
+    public function addBookUserProfile()
+    {
+        $this->checkIfUserIsConnected();
 
+        $title = trim($_POST['title'] ?? '');
+        $author = trim($_POST['author'] ?? '');
+        $description = trim($_POST['description'] ?? '');
+        $available = $_POST['available'] ?? null;
+
+        if (empty($title) || empty($author) || empty($description) || !in_array($available, ['0', '1'])) {
+            $_SESSION['message'] = "Veuillez remplir correctement tous les champs.";
+            header("Location: /index.php?page=myAccount");
+            exit();
+        }
+
+        $book = new Book();
+        $book->setTitle($title);
+        $book->setAuthor($author);
+        $book->setDescription($description);
+        $book->setAvailable($available);
+        $book->setImages('/images/livres.jpeg');
+
+        $userId = $_SESSION['user']['id'];
+        $this->bookManager->addBookByUser($book, $userId);
+
+        $_SESSION['message'] = "Livre ajouté avec succès.";
+        header("Location: /index.php?page=myAccount");
+        exit();
+    }
     public function updatePictureProfile()
     {
         $this->checkIfUserIsConnected();

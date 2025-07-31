@@ -56,6 +56,23 @@ class BookController extends AbstractController
         $view = new View('bookPage/updateBook');
         $view->render(['book' => $book]);
     }
+    public function showAddBook()
+    {
+        $this->checkIfUserIsConnected();
+        
+        $book = new Book([
+        'id' => 0,
+        'id_user' => null,
+        'title' => '',
+        'author' => '',
+        'sell_by' => '',
+        'available' => '0',
+        'images' => '',
+        'description' => '',
+    ]);
+        $view = new View('bookPage/addBook');
+       $view->render(['book' => $book]);
+    }
     public function updateBookProfile()
     {
         $id = $_POST['id'] ?? null;
@@ -104,15 +121,15 @@ class BookController extends AbstractController
             header("Location: index.php?page=updateBook&id=" . $bookId);
             exit();
         }
-var_dump($_FILES);
-die;
+        var_dump($_FILES['images']);
+        die;
         if (!isset($_FILES['images']) || $_FILES['images']['error'] !== UPLOAD_ERR_OK) {
             $_SESSION['message'] = "Aucune image valide n'a été envoyée.";
             header("Location: index.php?page=updateBook&id=" . $bookId);
             exit();
         }
 
-        $uploadDir = 'images/images_books/';
+        $uploadDir = 'images/images_book/';
         $ext = pathinfo($_FILES['images']['name'], PATHINFO_EXTENSION);
         $filename = uniqid('book_') . '.' . $ext;
         $targetFile = $uploadDir . $filename;

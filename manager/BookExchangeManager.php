@@ -103,4 +103,19 @@ class BookExchangeManager extends AbstractManager
             'id' => $id
         ]);
     }
+
+    public function addBookByUser(Book $book, int $userId): void
+    {
+        $sql = "INSERT INTO books (id_user, images, title, author, description, available, sell_by) VALUES (:id_user, :images, :title, :author, :description, :available, :sell_by)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'description' => $book->getDescription(),
+            'available' => $book->getAvailable(),
+            'id_user' => $userId,
+            'images' => $book->getImages(),
+            'sell_by' => $book->getSellBy(),
+        ]);
+    }
 }
