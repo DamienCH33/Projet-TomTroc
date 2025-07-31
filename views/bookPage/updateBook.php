@@ -17,7 +17,8 @@
                         </a>
                     </div>
                     <form method="POST" action="index.php?page=updatePictureBook&id=<?= $book->getId() ?>" enctype="multipart/form-data" id="pictureForm">
-                        <input type="file" name="images" id="fileInput" accept="image/*" style="display: none;" onchange="document.getElementById('pictureForm').submit();">
+                        <input type="file" name="images" id="fileInput" accept="image/*" style="display: none;"
+                            onchange="document.getElementById('pictureForm').submit();">
                     </form>
                 </div>
 

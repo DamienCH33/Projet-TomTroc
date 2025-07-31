@@ -121,8 +121,7 @@ class BookController extends AbstractController
             header("Location: index.php?page=updateBook&id=" . $bookId);
             exit();
         }
-        var_dump($_FILES['images']);
-        die;
+        
         if (!isset($_FILES['images']) || $_FILES['images']['error'] !== UPLOAD_ERR_OK) {
             $_SESSION['message'] = "Aucune image valide n'a été envoyée.";
             header("Location: index.php?page=updateBook&id=" . $bookId);
