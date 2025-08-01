@@ -1,12 +1,11 @@
-<section class="homeTwo py-5">
+<section class=" homeTwo py-5">
     <div class="container ">
-        <div class="row justify-content-start mb-4">
-            <div class="col-md-4">
-                <h1 class="mb-0 text-start">Nos livres à l’échange</h1>
+        <div class="row justify-content-between mb-4 align-items-center">
+            <div class="col-md-6">
+                <h1 class="mb-0 text-start custom-title">Nos livres à l’échange</h1>
             </div>
-
-            <div class="col-md-4 ms-auto">
-                <form class="d-flex" method="GET" role="search" action="index.php" style="max-width: 322px;">
+            <div class="col-md-3">
+                <form class="d-flex custom-search" method="GET" role="search" action="index.php">
                     <input type="hidden" name="page" value="BookExchange">
                     <input class="form-control" type="search" name="search" placeholder="Rechercher un livre" aria-label="Search" style="height: 50px;" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
                 </form>
@@ -15,11 +14,11 @@
         <?php if (empty($books)): ?>
             <p>Aucun livre trouvé pour votre recherche.</p>
         <?php else: ?>
-            <div class="row gy-5 py-5">
+            <div class="row g-4">
                 <?php foreach ($books as $book): ?>
-                    <div class="col-3">
-                        <a href="index.php?page=DetailBook&id=<?= $book->getId() ?>" class="text-decoration-none text-reset d-block h-100">
-                            <div class="card shadow-sm border-0 h-100 position-relative">
+                    <div class="col-md-3">
+                        <a href="index.php?page=DetailBook&id=<?= $book->getId() ?>" class="text-decoration-none text-reset">
+                            <div class="card shadow-sm">
                                 <img class="card-img-top" src="<?= htmlspecialchars($book->getImages()) ?>" alt="<?= htmlspecialchars($book->getTitle()) ?>" style="height: 200px; object-fit: cover;">
                                 <?php if (!$book->isAvailable()): ?>
                                     <span class="availability-badge unavailable position-absolute top-0 end-0 m-2">

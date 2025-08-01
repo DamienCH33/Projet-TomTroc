@@ -37,14 +37,17 @@
 
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0 align-items-center">
                         <li class="nav-item mx-2">
-                            <a class="nav-link d-flex align-items-center position-relative" href="/index.php?page=chat">
+                            <a class="nav-link d-flex align-items-center" href="/index.php?page=chat">
                                 <img src="images/Icon_messagerie.png" alt="Messagerie" class="icon-nav me-1">
-                                Messagerie
-                                <?php if (!empty($newMessagesCount)): ?>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        <?php $newMessagesCount = $GLOBALS['newMessagesCount'] ?? 0; ?>
-                                    </span>
-                                <?php endif; ?>
+                                <span class="d-flex align-items-center">
+                                    Messagerie
+                                    <?php $newMessagesCount = $GLOBALS['newMessagesCount'] ?? 0; ?>
+                                    <?php if ($newMessagesCount > 0): ?>
+                                        <span class="unread-badge ms-2">
+                                            <?= $newMessagesCount ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </span>
                             </a>
                         </li>
                         <?php if (isset($_SESSION['user'])): ?>
